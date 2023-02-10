@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import ConnectToPhantom from "./ConnectToPhantom";
 
 export function NavBar() {
   // Top Navigation Bar Element
   return (
+  
     <header class="py-1 bg-black font-mono">
       <div class="px-6 mx-auto max-w-screen-xl sm:px-6 lg:px-8 items-center">
 
@@ -40,10 +42,11 @@ export function NavBar() {
             </Link>
 
 
+            <ConnectToPhantom>
+
+            </ConnectToPhantom>
+
             
-            <a class="px-5 py-2.5 text-sm font-medium text-white bg-violet-900 hover:bg-violet-800 rounded-md shadow">
-             <button onClick={() => connectAccounts()}>Connect Phantom</button>
-            </a>
 
           </div>
 
