@@ -1,8 +1,9 @@
-import type { NextPage } from 'next'
+import { useState } from "react";
+import { ContractABI } from '../components/contractABI.js';
 import Head from 'next/head'
 import Image from 'next/image'
 
-const Home: NextPage = () => {
+export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -82,5 +83,3 @@ const Home: NextPage = () => {
     </div>
   )
 }
-
-export default Home
