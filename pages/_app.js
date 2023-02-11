@@ -1,12 +1,13 @@
 import '../styles/globals.css'
-import { React } from 'react'
+import { React,useState } from 'react'
 import { NavBar } from "../components/navBar.js";
 
 function MyApp({ Component, pageProps }) {
+  const [connected, setConnected] = useState(false);
   return (
     <>
-      <NavBar />  
-        <Component {...pageProps} />
+      <NavBar connected={connected} setConnected ={setConnected}/>  
+        <Component {...pageProps} connected={connected} setConnected ={setConnected}/>
     </>)
 }
 
