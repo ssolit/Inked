@@ -24,7 +24,8 @@
     "react-dom": "^18.2.0",
     "slate": "^0.90.0",
     "slate-history": "^0.86.0",
-    "slate-react": "^0.90.0"
+    "slate-react": "^0.90.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "18.11.3",
