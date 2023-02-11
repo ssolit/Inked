@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 // import { json } from 'stream/consumers'
 import Upload from '../components/Upload'
 import PaperSettings from '../components/PaperSettings'
@@ -10,6 +10,19 @@ export default function dashboard({ connected, setConnected }) {
   const [buttonClick, setButtonClick] = useState(false)
   const [settingsClick, setSettingsClick] = useState(false)
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch('http://localhost:3000/api/papers')
+      const json = await res.json()
+      console.log(json)
+    }
+    fetchData()
+  
+    return () => {
+      console.log("unmounting")
+    }
+  }, [third])
+  
   const data_array = [
     {
       hash: "hash 1",
