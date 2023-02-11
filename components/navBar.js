@@ -5,7 +5,6 @@ import Link from 'next/link'
 import ConnectToPhantom from "./ConnectToPhantom";
 
 export function NavBar({connected,setConnected}) {
-
   // Top Navigation Bar Element
   return (
 
@@ -47,7 +46,7 @@ export function NavBar({connected,setConnected}) {
 
             
 
-            <ConnectToPhantom connected={connected} setConnected ={setConnected} />
+            <ConnectToPhantom connected={connected} setConnected ={setConnected} key={connected} />
 
           
 

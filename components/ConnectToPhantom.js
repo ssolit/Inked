@@ -2,37 +2,48 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from 'next/link'
 
-const ConnectToPhantom = ({connected,setConnected}) => {
-    console.log("connected",connected)
+const ConnectToPhantom = ({ connected, setConnected }) => {
+
     const router = useRouter();
 
-    // const handleClick = (e, path) => {
-    //     e.preventDefault();
-
-
-    //     if (path === "/dashboard") {
-    //         console.log("I clicked on the About Page");
-    //         router.push(path);
-    //     }
-    // };
-
     const [phantom, setPhantom] = useState(null);
-    const [pubkey, setPubkey] = useState("null");
-    useEffect(async() => {
+    const [pubkey, setPubkey] = useState("empty");
+    const [trigger, setTrigger] = useState(false);
+
+    useEffect(() => {
+
+
         if (window.solana) {
             setPhantom(window.solana);
+
+
         }
-        const response = await window.solana.connect({ onlyIfTrusted: false });
-          console.log(
-            "public key",
-            response.publicKey.toString()
-          );
-            setPubkey(response.publicKey.toString())
+
     }, []);
+
+    useEffect(() => {
+
+        async function getPubkey() {
+
+            const pubkey = await window.solana._publicKey
+            if (!pubkey) {
+                console.log("no pubkeys")
+                return
+            }
+            setPubkey(pubkey.toString());
+        }
+
+        getPubkey()
+    }, [phantom]);
+
+
+
+
 
     // const [connected, setConnected] = useState(false);
 
-    const connectHandler = () => {
+    const connectHandler = async () => {
+        await phantom.connect();
         setConnected(true);
         const path = "/dashboard"
         router.push(path)
@@ -43,15 +54,15 @@ const ConnectToPhantom = ({connected,setConnected}) => {
             console.log("connected")
             return (
                 <>
-                <button
+                    <button 
                         className="py-2 px-4 border border-white rounded-md text-sm font-medium text-white whitespace-nowrap hover:bg-white hover:text-orange-700"
                     >
                         {/* only return the first 3 and last 4 of pubkey */}
-                        {pubkey.slice(0,3)}...{pubkey.slice(-4)}
+                        {pubkey.slice(0, 3)}...{pubkey.slice(-4)}
                     </button>
                 </>
-                
-                
+
+
             );
         } else {
             console.log("not connected")
