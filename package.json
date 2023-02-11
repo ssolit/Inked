@@ -6,8 +6,17 @@
     "start": "next start"
   },
   "dependencies": {
+    "@metaplex-foundation/js": "^0.18.0",
     "@solana/web3.js": "^1.73.2",
+    "@uiw/react-textarea-code-editor": "1.4.4",
+    "base58-js": "^1.0.5",
+    "crypto-js": "^4.1.1",
+    "fix-path": "3.0.0",
+    "java-random": "^0.4.0",
+    "jsrsasign": "^10.6.1",
     "next": "latest",
+    "next-remove-imports": "^1.0.8",
+    "node-fetch": "^2.6.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
