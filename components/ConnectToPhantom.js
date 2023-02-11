@@ -17,15 +17,17 @@ const ConnectToPhantom = ({connected,setConnected}) => {
     // };
 
     const [phantom, setPhantom] = useState(null);
+    const [pubkey, setPubkey] = useState("null");
     useEffect(async() => {
         if (window.solana) {
             setPhantom(window.solana);
         }
-        const response = await solana.connect({ onlyIfTrusted: false });
+        const response = await window.solana.connect({ onlyIfTrusted: false });
           console.log(
             "public key",
             response.publicKey.toString()
           );
+            setPubkey(response.publicKey.toString())
     }, []);
 
     // const [connected, setConnected] = useState(false);
@@ -44,7 +46,8 @@ const ConnectToPhantom = ({connected,setConnected}) => {
                 <button
                         className="py-2 px-4 border border-white rounded-md text-sm font-medium text-white whitespace-nowrap hover:bg-white hover:text-orange-700"
                     >
-                        Connect Phantom
+                        {/* only return the first 3 and last 4 of pubkey */}
+                        {pubkey.slice(0,3)}...{pubkey.slice(-4)}
                     </button>
                 </>
                 
