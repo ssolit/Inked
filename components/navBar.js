@@ -5,10 +5,10 @@ import Link from 'next/link'
 import ConnectToPhantom from "./ConnectToPhantom";
 
 export function NavBar() {
-  
+
   // Top Navigation Bar Element
   return (
-  
+
     <header className="py-1 bg-black font-mono">
       <div className="px-6 mx-auto max-w-screen-xl sm:px-6 lg:px-8 items-center">
 
@@ -41,13 +41,15 @@ export function NavBar() {
                 Features
               </p>
             </Link>
-            
-            <ConnectToPhantom>
-              
-            </ConnectToPhantom>
-            
 
             
+
+            <ConnectToPhantom>
+
+            </ConnectToPhantom>
+
+
+
 
           </div>
 
@@ -56,47 +58,4 @@ export function NavBar() {
       </div>
     </header>
   )
-}
-
-
-export function requestAccount() {
-  // getting whether user is authenticated
-  const [authenticated, setAuthenticated] = useState(false);
-
-  const [walletAddress, setWalletAddress] = useState("");
-  const [balance, setBalance] = useState("");
-
-  // talking with metamask to get the accounts with wallet connection
-  async function requestAccounts() {
-    console.log('Requesting account...');
-
-    // check if MetaMask is installed
-    if ("solana" in window) {
-      console.log('detected phantom wallet');
-
-      // update wallet address and balance
-      try {
-        const accounts = await window.phantom.solana.request({ method: 'sol_requestAccounts' });
-        console.log(accounts);
-
-
-        setWalletAddress(accounts[0]);
-        getBalance();
-
-        if (accounts.length > 0) {
-          setAuthenticated(true);
-        } else {
-          setAuthenticated(false);
-        }
-
-        console.log('auth detected', authenticated)
-
-      } catch (error) {
-        console.error(error);
-      }
-
-    } else {
-      console.log('no phantom detected');
-    }
-  }
 }
