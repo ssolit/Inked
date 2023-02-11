@@ -46,9 +46,9 @@ var ConnectToPhantom = function () {
         if (connected) {
             return (
                 !connected ?
-                    null : <Link href="/dashBoard" className="py-2 px-4 border border-purple-700 rounded-md text-sm font-medium text-purple-700 whitespace-nowrap hover:bg-purple-200">
-                        <p onClick={(e) => handleClick(e, "/dashboard")} class="text-white transition hover:text-white/75">
-                            Connected: View Dashboard
+                    null : <Link href="/dashBoard" className="bg-orange-500 py-2 px-4 rounded-md text-sm font-medium text-white whitespace-nowrap hover:bg-purple-200">
+                        <p onClick={(e) => handleClick(e, "/dashboard")}>
+                            Launch Dashboard
                         </p>
                     </Link>
             );
@@ -57,8 +57,8 @@ var ConnectToPhantom = function () {
         }
         return (
             <div>
-                <button onClick={connectHandler} className="bg-purple-500 py-2 px-4 border border-transparent rounded-md text-sm font-medium text-white whitespace-nowrap hover:bg-opacity-75">
-                    Connect to Phantom
+                <button onClick={connectHandler} className="py-2 px-4 border border-white rounded-md text-sm font-medium text-white whitespace-nowrap hover:bg-white hover:text-orange-700">
+                    Connect Phantom
                 </button>
             </div>
         );

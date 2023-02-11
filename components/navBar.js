@@ -9,7 +9,7 @@ export function NavBar() {
   // Top Navigation Bar Element
   return (
 
-    <header className="py-1 bg-black font-mono">
+    <header className="py-1 bg-orange-700 font-mono">
       <div className="px-6 mx-auto max-w-screen-xl sm:px-6 lg:px-8 items-center">
 
         <div className="flex items-center justify-between h-16">
@@ -18,7 +18,6 @@ export function NavBar() {
           <Link href="/">
             <Image 
               src="logo.svg"
-              href="/"
               alt="logo"
               width={100}
               height={100}
