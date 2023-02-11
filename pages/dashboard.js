@@ -46,9 +46,10 @@ export default function dashboard({ connected, setConnected }) {
 
   if (connected === false) {
     return (
-      <>
-        Please Connect Phantom First
-      </>
+      <div class="bg-[url(../public/Pen1.jpeg)] h-screen opacity-75 ">
+        <p class="text-[72px] text-center align-middle mt-10"> Welcome to Inked!</p>
+        <p class="text-[72px] text-center align-middle"> Please connect your Phantom wallet to continue. </p>
+      </div>
     )
   } else {
     return (
@@ -111,7 +112,7 @@ export default function dashboard({ connected, setConnected }) {
                     <PaperSettings key={item["hash"]} 
                     buttonClick={settingsClick} setButtonClick={setSettingsClick} item = {item} 
                     settingsClickId ={settingsClickId} setSettingsClickId = {setSettingsClickId}/>}
-          
+
                   </div >
 
                   <p class="text-sm font-medium">Author: {item["author"]}</p>
