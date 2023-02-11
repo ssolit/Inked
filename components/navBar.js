@@ -6,6 +6,18 @@ import ConnectToPhantom from "./ConnectToPhantom";
 
 export function NavBar() {
 
+  const MyImage = (props) => {
+    return (
+      <Image
+        loader={myLoader}
+        src="me.png"
+        alt="Picture of the author"
+        width={500}
+        height={500}
+      />
+    )
+  }
+
   // Top Navigation Bar Element
   return (
 
@@ -15,11 +27,13 @@ export function NavBar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex-1 md:flex md:items-center md:gap-12">
 
-            <Link href="/">
-              <button>
-                <img className="logo m-4" src={'../logo.svg'} alt="Inked logo" />
-              </button>
-            </Link>
+            
+          <Image 
+            src="logo.svg"
+            alt="logo"
+            width={100}
+            height={100}
+          />
 
           </div>
 
