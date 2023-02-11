@@ -7,6 +7,21 @@ import Upload from '../components/Upload'
 export default function dashboard() {
   const [buttonClick, setButtonClick] = useState(false)
 
+  const ex_json = ```{papers: [
+                        paperData: {"title" : "Title 1", 
+                                    "author" : "Author 1", 
+                                    "shared" : ["address 1.1"],
+                                    "reviewed" : "Reviewer 1",
+                                    "url" : "https://url1.com"
+                                  },
+                        paperData: {"title" : "Title 2", 
+                                  "author" : "Author 2", 
+                                  "shared" : ["address 2.1"],
+                                  "reviewed" : "Reviewer 2",
+                                  "url" : "https://url2.com"
+                                },
+                      ]}```;
+
   return (
     <div class="px-4 pt-12 pb-32 mx-auto max-w-screen-x1 sm:px-6 lg:px-8">
       <div class = "flex justify-evenly">
