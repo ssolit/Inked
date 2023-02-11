@@ -46,7 +46,7 @@ var ConnectToPhantom = function () {
         if (connected) {
             return (
                 !connected ?
-                    null : <Link href="/dashBoard" className="bg-orange-500 py-2 px-4 rounded-md text-sm font-medium text-white whitespace-nowrap hover:bg-purple-200">
+                    null : <Link href="/dashboard" className="bg-orange-500 py-2 px-4 rounded-md text-sm font-medium text-white whitespace-nowrap hover:bg-purple-200">
                         <p onClick={(e) => handleClick(e, "/dashboard")}>
                             Launch Dashboard
                         </p>
