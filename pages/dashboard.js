@@ -89,6 +89,7 @@ export default function dashboard({ connected, setConnected }) {
             ))}
         </div>
       </div>
+      </div>
     )
   }
 }
