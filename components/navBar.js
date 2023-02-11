@@ -17,10 +17,10 @@ export function NavBar({connected,setConnected}) {
 
           <Link href="/">
             <Image 
-              src="logo.svg"
+              src="logo_title.svg"
               alt="logo"
-              width={100}
-              height={100}
+              width={150}
+              height={150}
             />
           </Link>
 
