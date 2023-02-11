@@ -2,44 +2,48 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from 'next/link'
 
-const ConnectToPhantom = ({connected,setConnected}) => {
-    console.log("connected",connected)
+const ConnectToPhantom = ({ connected, setConnected }) => {
+
     const router = useRouter();
 
     const [phantom, setPhantom] = useState(null);
-    const [pubkey, setPubkey] = useState("null");
-    
-    useEffect( () => {
+    const [pubkey, setPubkey] = useState("empty");
+    const [trigger, setTrigger] = useState(false);
 
-        
+    useEffect(() => {
+
+
         if (window.solana) {
             setPhantom(window.solana);
-            console.log("phantom");
-            
+
+
         }
-        
-        return () => {
-            console.log("cleanup");
-        }
-        
 
     }, []);
-    useEffect( () => {
-        if (connected) {
-            console.log("connnected rerender")
-            async function getPubkey() {
-                const pubkey = await window.solana.publicKey.toString();
-                setPubkey(pubkey);
+
+    useEffect(() => {
+
+        async function getPubkey() {
+
+            const pubkey = await window.solana._publicKey
+            if (!pubkey) {
+                console.log("no pubkeys")
+                return
             }
-            // setPubkey(await window.solana.publicKey.toString());
-            
+            setPubkey(pubkey.toString());
         }
-    }, [connected]);
-    
+
+        getPubkey()
+    }, [phantom]);
+
+
+
+
 
     // const [connected, setConnected] = useState(false);
 
-    const connectHandler = () => {
+    const connectHandler = async () => {
+        await phantom.connect();
         setConnected(true);
         const path = "/dashboard"
         router.push(path)
@@ -50,15 +54,15 @@ const ConnectToPhantom = ({connected,setConnected}) => {
             console.log("connected")
             return (
                 <>
-                <button
+                    <button 
                         className="py-2 px-4 border border-white rounded-md text-sm font-medium text-white whitespace-nowrap hover:bg-white hover:text-orange-700"
                     >
                         {/* only return the first 3 and last 4 of pubkey */}
-                        {pubkey.slice(0,3)}...{pubkey.slice(-4)}
+                        {pubkey.slice(0, 3)}...{pubkey.slice(-4)}
                     </button>
                 </>
-                
-                
+
+
             );
         } else {
             console.log("not connected")
@@ -73,17 +77,17 @@ const ConnectToPhantom = ({connected,setConnected}) => {
                 </div>
             );
         }
-    } 
-        return (
-            <a
-                href="https://phantom.app/"
-                target="_blank"
-                className="bg-purple-500 px-4 py-2 border border-transparent rounded-md text-base font-medium text-white"
-            >
-                Get Phantom
-            </a>
-        );
     }
+    return (
+        <a
+            href="https://phantom.app/"
+            target="_blank"
+            className="bg-purple-500 px-4 py-2 border border-transparent rounded-md text-base font-medium text-white"
+        >
+            Get Phantom
+        </a>
+    );
+}
 
 
 export default ConnectToPhantom;
