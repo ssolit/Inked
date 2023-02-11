@@ -1,0 +1,12 @@
+.button-rounded-default {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    display: flex;
+  }
+  
+  .button-primitive-defau-instance {
+    height: 100%;
+    flex-basis: 100%;
+  }
+  

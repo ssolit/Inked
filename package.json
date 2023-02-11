@@ -8,6 +8,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.10",
     "@heroicons/react": "^2.0.15",
+    "@solana/web3.js": "^1.73.2",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0"

@@ -5,48 +5,65 @@ import Link from 'next/link'
 import ConnectToPhantom from "./ConnectToPhantom";
 
 export function NavBar() {
+
+  const MyImage = (props) => {
+    return (
+      <Image
+        loader={myLoader}
+        src="me.png"
+        alt="Picture of the author"
+        width={500}
+        height={500}
+      />
+    )
+  }
+
   // Top Navigation Bar Element
   return (
-  
-    <header class="py-1 bg-black font-mono">
-      <div class="px-6 mx-auto max-w-screen-xl sm:px-6 lg:px-8 items-center">
 
-        <div class="flex items-center justify-between h-16">
-          <div class="flex-1 md:flex md:items-center md:gap-12">
+    <header className="py-1 bg-black font-mono">
+      <div className="px-6 mx-auto max-w-screen-xl sm:px-6 lg:px-8 items-center">
 
-            <Link href="/">
-              <button>
-                <img src={'../Vector3.png'} alt="GroupPay logo" />
-              </button>
-            </Link>
+        <div className="flex items-center justify-between h-16">
+          <div className="flex-1 md:flex md:items-center md:gap-12">
+
+            
+          <Image 
+            src="logo.svg"
+            alt="logo"
+            width={100}
+            height={100}
+          />
 
           </div>
 
-          <div class="flex text-sm items-center gap-6 justify-end pl-4">
+          <div className="flex text-sm items-center gap-6 justify-start pl-4">
             <Link href="/">
-              <p class="text-white transition hover:text-white/75">
+              <p className="text-white transition hover:text-white/75">
                 Home
               </p>
             </Link>
 
             <Link href="/">
-              <p class="text-white transition hover:text-white/75">
+              <p className="text-white transition hover:text-white/75">
                 About
               </p>
             </Link>
 
             <Link href="/">
-              <p class="text-white transition hover:text-white/75">
+              <p className="text-white transition hover:text-white/75">
                 Features
               </p>
             </Link>
 
+            
 
             <ConnectToPhantom>
 
             </ConnectToPhantom>
 
-            
+
+
 
           </div>
 

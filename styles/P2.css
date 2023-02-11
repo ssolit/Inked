@@ -1,0 +1,148 @@
+.mac-book-pro-14-3 {
+    color: #c24600;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    font-family: Helvetica Neue, Arial;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+  }
+  
+  .navigation-header-defa {
+    width: 100%;
+    background-color: #fff;
+    flex-direction: row;
+    flex-basis: 7%;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 4px;
+    padding-top: 2px;
+    padding-bottom: 1px;
+    padding-left: 24px;
+    display: flex;
+  }
+  
+  .frame {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    margin-bottom: 1px;
+  }
+  
+  .inked {
+    margin-top: 1px;
+    margin-left: 9px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 30px;
+  }
+  
+  .home {
+    margin-left: 97px;
+  }
+  
+  .blog {
+    margin-top: 2px;
+    margin-left: 26px;
+    margin-right: 360px;
+  }
+  
+  .button-outline-default {
+    color: #c24600;
+    text-align: center;
+    height: 60%;
+    background-color: #0000;
+    border: none;
+    flex-direction: row;
+    flex-basis: 11%;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-bottom: 1px;
+    margin-left: 360px;
+    font-family: Helvetica Neue, Arial;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 24px;
+    display: flex;
+  }
+  
+  .button-primitive-defau {
+    height: 100%;
+    border: 1px solid #c24600;
+    border-radius: 4px;
+    flex-direction: row;
+    flex-basis: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2px;
+    display: flex;
+  }
+  
+  .welcome-0-x-32-aff {
+    margin-top: 1px;
+  }
+  
+  .line-1 {
+    width: 1512px;
+    height: 1px;
+    object-fit: cover;
+    border: 1px solid #9b9b9b;
+    margin-bottom: 56px;
+  }
+  
+  .flex-container {
+    width: 50%;
+    flex-direction: row;
+    flex-basis: 4%;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-bottom: 104px;
+    margin-left: 115px;
+    display: flex;
+  }
+  
+  .button-primitive-hover-instance {
+    height: 100%;
+    flex-basis: 11%;
+    margin-right: 80px;
+  }
+  
+  .button-primitive-hover-instance-1 {
+    height: 100%;
+    flex-basis: 11%;
+    margin-left: 106px;
+  }
+  
+  .button-primitive-hover-instance-3 {
+    height: 100%;
+  }
+  
+  .flex-container-1 {
+    width: 30%;
+    flex-direction: row;
+    flex-basis: 47%;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 113px;
+    display: flex;
+  }
+  
+  .stacked-instance-1 {
+    height: 100%;
+    flex-basis: 100%;
+    margin-right: -98px;
+  }
+  
+  .ant-designsetting-fi {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    margin-top: 34px;
+    margin-left: -14px;
+  }
+  
