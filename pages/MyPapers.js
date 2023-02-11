@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function MyPapers() {
   return (
@@ -26,16 +27,36 @@ export default function MyPapers() {
 
       <div>
 
-      
+        <div class="mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div class = "bg-blue-100">
+            <Image 
+              src="/../public/papers.jpeg"
+              alt="papers image"
+              width={100}
+              height={100}
+            />
+            <div class="pt-4">
+              <p class="text-lg font-medium">Paper 1</p>
+              <p class="text-sm font-medium">Author:</p>
+              <p class="text-sm font-medium">Shared With:</p>
+            </div>
+            <div class="text-center text-xs p-5 bg-gray-100 rounded-full w-3/4">
+              Peer Reviewed By: Research Gate
+            </div>
 
-        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 bg-blue-100">
-          <img src="../assets/papers.jpeg" alt="Image" class="w-full rounded-lg"/>
-          <div class="pt-4">
-            <p class="text-lg font-medium">Paper 1</p>
-            <p class="text-sm font-medium">Author:</p>
-            <p class="text-sm font-medium">Shared With:</p>
+            <Link href="https://etherscan.io">
+              <p className="text-bg-gray-300 hover:text-cyan-600 underline transition hover:decoration-blue-400">
+                Open In Explorer
+              </p>
+            </Link>
+
           </div>
+
+          
         </div>
+
+        
+        
 
       </div>
     </div>
