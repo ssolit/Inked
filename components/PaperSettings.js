@@ -1,17 +1,14 @@
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-import SignAndInk from './SignAndInk.js'
+import { LockClosedIcon } from '@heroicons/react/20/solid'
 
-const Upload = ({ setButtonClick, buttonClick }) => {
+const PaperSettings = ({ setButtonClick, buttonClick,item,settingsClickId,setSettingsClickId }) => {
   // const [open, setOpen] = useState(true)
 
   const cancelButtonRef = useRef(null)
-  const [authors, setAuthors] = useState("");
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [abstract, setAbstract] = useState("");
-  const [keywords, setKeywords] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [file, setFile] = useState("");
 
   const handleSubmit = async e => {
@@ -34,23 +31,9 @@ const Upload = ({ setButtonClick, buttonClick }) => {
     // setToken(token);
 
   }
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file)
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      }
-      fileReader.onerror = (error) => {
-        reject(error);
-      }
-    })
-  }
-  const onFileChange = async(e) => {
-    const file = e.target.files[0]
-    const base64 = await convertBase64(file)
-    console.log(base64)
-    setFile(base64);
+  const onFileChange = (e) => {
+    // Update the state
+    setFile({ selectedFile: event.target.files[0] });
   };
   const onFileUpload = (e) => {
     // Create an object of formData
@@ -59,14 +42,8 @@ const Upload = ({ setButtonClick, buttonClick }) => {
     console.log(file.selectedFile);
   };
 
-  // const signAndInk = async e => {
-  //   e.preventDefault();
-  //   //promp user to sign
-
-  // }
-
   return (
-    <Transition.Root show={buttonClick} as={Fragment}>
+    <Transition.Root show={buttonClick&& settingsClickId === item["hash"]} as={Fragment}>
       <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setButtonClick}>
         <Transition.Child
           as={Fragment}
@@ -96,9 +73,11 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                   <div className="sm:flex sm:items-start">
 
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                      <Dialog.Title as="h1" className="text-2xl font-medium leading-6 text-gray-900">
-                        Ink your paper
+                      <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                      PaperSettings
                       </Dialog.Title>
+                      <h1>{item["title"]}</h1>
+                      <h1>{item["author"]}</h1>
                       <div className="mt-2">
                         <form className="mt-8 space-y-10 " onSubmit={handleSubmit}>
                           {/* <input type="hidden" name="remember" defaultValue="true" /> */}
@@ -116,7 +95,7 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                                 required
                                 className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                 placeholder="Mikehunt@quotable.com"
-                                onChange={e => setAuthors(e.target.value)}
+                                onChange={e => setEmail(e.target.value)}
                               />
                             </div>
                             <div>
@@ -131,77 +110,11 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                                 autoComplete="text"
                                 required
                                 className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                placeholder="ex. The best paper ever"
-                                onChange={e => setTitle(e.target.value)}
+                                placeholder="title"
+                                onChange={e => setPassword(e.target.value)}
                               />
                             </div>
-                            <div>
-                              <h2>Category</h2>
-                              <label htmlFor="title" className="sr-only">
-                                Category
-                              </label>
-                              <input
-                                id="category"
-                                name="category"
-                                type="text"
-                                autoComplete="text"
-                                required
-                                className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                placeholder="ex. Nuclear Theory, Quantum Mechanics"
-                                onChange={e => setCategory(e.target.value)}
-                              />
-                            </div>
-                            <div>
-                              <h2>Abstract</h2>
-                              <label htmlFor="title" className="sr-only">
-                              Abstract
-                              </label>
-                              <textarea
-                                id="abstract"
-                                name="abstract"
-                                type="text"
-                                autoComplete="text"
-                                required
-                                className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                placeholder="Ipsum Lorem"
-                                onChange={e => setAbstract(e.target.value)}
-                              />
-                            </div>
-                            <div>
-                              <h2>Keywords</h2>
-                              <label htmlFor="title" className="sr-only">
-                              Keywords
-                              </label>
-                              <input
-                                id="keywords"
-                                name="keywords"
-                                type="text"
-                                autoComplete="text"
-                                required
-                                className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                placeholder="ex.Cold Fusion, Nuclear, Physics"
-                                onChange={e => setKeywords(e.target.value)}
-                              />
-                            </div>
-                            <div>
-                              <h2>Upload</h2>
-                              <label htmlFor="upload" className="sr-only">
-                                Upload
-                              </label>
-                              <div>
-                                <input
-                                  id="upload"
-                                  name="upload"
-                                  type="file"
-                                  autoComplete="upload"
-                                  required
-                                  className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                  placeholder="upload"
-                                  onChange={onFileChange}
-                                />
-                                
-                              </div>
-                            </div>
+                            
 
 
 
@@ -222,13 +135,22 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                   <button
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => { setButtonClick(false) }}
+                    onClick={() => { setButtonClick(false);setSettingsClickId(null) }}
                     ref={cancelButtonRef}
                   >
                     Cancel
                   </button>
-             
-                  <SignAndInk rawfile = {file}/>
+                  <button
+                    type="submit"
+                    className="group relative flex w-1/4 justify-around rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    onClick={() => { setButtonClick(false);setSettingsClickId(null) }}
+                    ref={cancelButtonRef}
+                  >
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                      <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
+                    </span>
+                    <span>Create</span>
+                  </button>
 
                 </div>
               </Dialog.Panel>
@@ -240,6 +162,6 @@ const Upload = ({ setButtonClick, buttonClick }) => {
   )
 }
 
-export default Upload
+export default PaperSettings
 
 
