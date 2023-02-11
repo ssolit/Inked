@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from 'react';
 import { v4 } from "uuid"
 import WeaveHelper from "../weaveapi/helper";
-import CodeEditor from "@uiw/react-textarea-code-editor";
+// import CodeEditor from "@uiw/react-textarea-code-editor";
 import SHA256 from "crypto-js/sha256";
 
 import { Metaplex, keypairIdentity, bundlrStorage } from "@metaplex-foundation/js";
@@ -14,7 +14,7 @@ const sideChain = "https://public.weavechain.com:443/92f30f0b6be2732cb817c19839b
 //const sideChain = "http://localhost:18080/92f30f0b6be2732cb817c19839b0940c";
 
 const authChain = "solana";
-const network = "devnet"; //"testnet";
+const network = "testnet"; //"testnet";
 
 const organization = "weavedemo";
 const data_collection = "inked";
@@ -241,7 +241,7 @@ class Writer extends Component {
             message
         } = this.state;
 
-        return <div className="text-gray-800 bg-teal-50 min-h-screen">
+        return <div className="text-gray-800 bg-white min-h-screen">
             <header className="items-center justify-between pt-12">
                 <h1 className="mx-auto text-center pb-2 text-5xl font-extrabold font-mono text-gray-800">
                     Writing a document
@@ -280,7 +280,7 @@ class Writer extends Component {
                     <br />
                     <label>Title</label>
                     &nbsp;
-                    <CodeEditor className="mt-12 mx-8 border shadow-xl border-blue-500/10"
+                    {/* <CodeEditor className="mt-12 mx-8 border shadow-xl border-blue-500/10"
                                 value={title}
                                 language="text"
                                 rows={5}
@@ -293,7 +293,7 @@ class Writer extends Component {
                                     fontFamily:
                                         "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
                                 }}
-                    />
+                    /> */}
                     <br />
                     <br />
 
@@ -308,7 +308,7 @@ class Writer extends Component {
                     <br />
                     <br />
                     <label>Abstract</label>
-                    <CodeEditor className="mt-12 mx-8 border shadow-xl border-blue-500/10"
+                    {/* <CodeEditor className="mt-12 mx-8 border shadow-xl border-blue-500/10"
                                 value={abstract}
                                 language="text"
                                 rows={20}
@@ -321,7 +321,7 @@ class Writer extends Component {
                                     fontFamily:
                                         "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
                                 }}
-                    />
+                    /> */}
                     <br />
                     <br />
 

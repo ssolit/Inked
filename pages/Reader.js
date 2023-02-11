@@ -13,11 +13,11 @@ const network = "testnet";
 
 const organization = "weavedemo";
 const data_collection = "inked";
-const table  = "documents"
+const table_abstracts = "abstracts";
+const table_documents = "documents"
 
 const storageAccount = "EiG3thMCVKXKMAKD2ryQvRqx3pEb2ZxjBdRkDQ7At2na"; //The program storage account that keeps the hashes association
 
-const { ethereum } = window;
 
 class Reader extends Component {
     constructor(props) {
@@ -54,11 +54,12 @@ class Reader extends Component {
 
     async getCurrentAccount() {
         const response = await window.solana.connect();
-        this.setState({ currentPhantomAccount: response.publicKey.toString() });
+        return response.publicKey.toString();
     }
 
     async connect() {
-        this.setState({ currentPhantomAccount: await this.getCurrentAccount() });
+        const wallet = await this.getCurrentAccount();
+        this.setState({ currentPhantomAccount: wallet });
 
         //a new key is generated every time, so there is no key management needed for the consumer (which does not need to know about weavechain)
         // rights will be inherited based on the wallet ownership proof and NFT ownership (could also be payments on chain)
@@ -68,16 +69,15 @@ class Reader extends Component {
 
         //This message must match what's hashed on server side, changing it here should trigger changing it also in the node
         let msg = "Please sign this message to confirm you own this wallet\nThere will be no blockchain transaction or any gas fees." +
-            "\n\nWallet: " + this.state.currentPhantomAccount +
+            "\n\nWallet: " + wallet +
             "\nKey: " + pub;
+        console.log(msg)
 
-        const sig = await ethereum.request({
-            method: 'personal_sign',
-            params: [this.state.currentPhantomAccount, msg]
-        });
+        const signature = await window.solana.signMessage(new TextEncoder().encode(msg), 'utf8');
+        const sig = binary_to_base58(signature.signature);
 
         const credentials = {
-            "account": authChain + ":" + this.state.currentPhantomAccount,
+            "account": authChain + ":" + wallet,
             "sig": sig,
             "template": "*",
             "role": "*"
@@ -108,6 +108,38 @@ class Reader extends Component {
         return { nodeApi, session };
     }
 
+    async read() {
+        try {
+            const keys = WeaveHelper.generateKeys();
+            const pub = this.state.publicKey && this.state.privateKey ? this.state.publicKey : keys[0];
+            const pvk = this.state.publicKey && this.state.privateKey ? this.state.privateKey : keys[1];
+
+            const nodeApi = new WeaveHelper.WeaveAPI().create(WeaveHelper.getConfig(sideChain, pub, pvk));
+            await nodeApi.init();
+            console.log(nodeApi)
+            const pong = await nodeApi.ping();
+            console.log(pong)
+
+            const session = await nodeApi.login(organization, pub, data_collection);
+
+            //2. read the private document
+            const filter = new WeaveHelper.Filter(null, null, null, ["pubkey", "did"]);
+            const resRead = await nodeApi.read(session, data_collection, table_abstracts, filter, WeaveHelper.Options.READ_DEFAULT_NO_CHAIN)
+            if (resRead?.data) {
+                //here is an array of items that contains
+                // ts - publish timestamp
+                // pubkey - publisher key
+                // document details: did, title, abstract, authors, category, keywords
+                console.log(resRead.data);
+            } else {
+                //error
+                console.log(resRead);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     async download() {
         const {
             did
@@ -118,7 +150,7 @@ class Reader extends Component {
 
         //2. read the private document
         const filter = new WeaveHelper.Filter(WeaveHelper.FilterOp.eq("did", did), null, null, [ "pubkey", "did" ]);
-        const resRead = await nodeApi.read(session, data_collection, table, filter, WeaveHelper.Options.READ_DEFAULT_NO_CHAIN)
+        const resRead = await nodeApi.read(session, data_collection, table_documents, filter, WeaveHelper.Options.READ_DEFAULT_NO_CHAIN)
 
         try {
             const encoded = resRead?.data ? resRead.data[0]["document"] : null;
@@ -183,7 +215,7 @@ class Reader extends Component {
             message
         } = this.state;
 
-        return <section className="bg-teal-50 min-h-screen">
+        return <section className="bg-white min-h-screen">
             <header className="items-center justify-between pt-12">
                 <h1 className="mx-auto text-center pb-2 text-5xl font-extrabold font-mono text-gray-800">
                     Access a document
@@ -220,6 +252,8 @@ class Reader extends Component {
                         <br />
 
                         <button className="px-5 py-2.5 mt-2 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 rounded-md shadow" type="submit" onClick={() => this.connect()}>Connect Wallet</button>
+                        &nbsp;
+                        <button className="px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 rounded-md shadow" type="submit" onClick={() => this.read()}>Read Documents</button>
                         &nbsp;
                         <button className="px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 rounded-md shadow" type="submit" onClick={() => this.download()}>Download</button>
                     </p>

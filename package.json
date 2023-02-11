@@ -13,14 +13,18 @@
     "@uiw/react-textarea-code-editor": "1.4.4",
     "base58-js": "^1.0.5",
     "crypto-js": "^4.1.1",
+    "draft-js": "^0.11.7",
     "fix-path": "3.0.0",
     "java-random": "^0.4.0",
     "jsrsasign": "^10.6.1",
     "next": "latest",
     "next-remove-imports": "^1.0.8",
     "node-fetch": "^2.6.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "slate": "^0.90.0",
+    "slate-history": "^0.86.0",
+    "slate-react": "^0.90.0"
   },
   "devDependencies": {
     "@types/node": "18.11.3",

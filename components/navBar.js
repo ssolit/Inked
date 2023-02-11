@@ -9,7 +9,7 @@ export function NavBar() {
   // Top Navigation Bar Element
   return (
 
-    <header className="py-1 bg-orange-700 font-mono">
+    <header className="bg-orange-700 font-mono">
       <div className="px-6 mx-auto max-w-screen-xl sm:px-6 lg:px-8 items-center">
 
         <div className="flex items-center justify-between h-16">
@@ -27,23 +27,18 @@ export function NavBar() {
           </div>
 
           <div className="flex text-sm items-center gap-6 justify-start pl-4">
-            <Link href="/">
+            <Link href="/Writer">
               <p className="text-white transition hover:text-white/75">
-                Home
+                Writer.js
               </p>
             </Link>
 
-            <Link href="/">
+            <Link href="/Reader">
               <p className="text-white transition hover:text-white/75">
-                About
+                Reader.js
               </p>
             </Link>
 
-            <Link href="/">
-              <p className="text-white transition hover:text-white/75">
-                Features
-              </p>
-            </Link>
 
             
 
