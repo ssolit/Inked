@@ -6,29 +6,36 @@ const ConnectToPhantom = ({connected,setConnected}) => {
     console.log("connected",connected)
     const router = useRouter();
 
-    // const handleClick = (e, path) => {
-    //     e.preventDefault();
-
-
-    //     if (path === "/dashboard") {
-    //         console.log("I clicked on the About Page");
-    //         router.push(path);
-    //     }
-    // };
-
     const [phantom, setPhantom] = useState(null);
     const [pubkey, setPubkey] = useState("null");
-    useEffect(async() => {
+    
+    useEffect( () => {
+
+        
         if (window.solana) {
             setPhantom(window.solana);
+            console.log("phantom");
+            
         }
-        const response = await window.solana.connect({ onlyIfTrusted: false });
-          console.log(
-            "public key",
-            response.publicKey.toString()
-          );
-            setPubkey(response.publicKey.toString())
+        
+        return () => {
+            console.log("cleanup");
+        }
+        
+
     }, []);
+    useEffect( () => {
+        if (connected) {
+            console.log("connnected rerender")
+            async function getPubkey() {
+                const pubkey = await window.solana.publicKey.toString();
+                setPubkey(pubkey);
+            }
+            // setPubkey(await window.solana.publicKey.toString());
+            
+        }
+    }, [connected]);
+    
 
     // const [connected, setConnected] = useState(false);
 
