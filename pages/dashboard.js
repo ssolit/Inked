@@ -40,30 +40,27 @@ export default function dashboard() {
       </div>
 
       <div>
-
-        <div class="mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div class = "bg-blue-100">
-            <Image 
+        <div class="mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3 drop-shadow-lg">
+          <div class = "bg-blue-100 rounded-t">
+            <Image class="rounded-t-lg"
               src="/../public/papers.jpeg"
               alt="papers image"
-              width={100}
-              height={100}
+              width={500}
+              height={500}
             />
-            <div class="pt-4">
-              <p class="text-lg font-medium">Paper 1</p>
+            <div class="pt-4 mx-4">
+              <p class="text-lg font-semibold mb-2">Paper 1</p>
               <p class="text-sm font-medium">Author:</p>
               <p class="text-sm font-medium">Shared With:</p>
+              <div class="text-center text-xs p-1 bg-gray-100 rounded-full w-3/4 mt-2 mb-2">
+                Peer Reviewed By: Research Gate
+              </div>
             </div>
-            <div class="text-center text-xs p-5 bg-gray-100 rounded-full w-3/4">
-              Peer Reviewed By: Research Gate
-            </div>
-
             <Link href="https://etherscan.io">
-              <p className="text-bg-gray-300 hover:text-cyan-600 underline transition hover:decoration-blue-400">
+              <p className="text-bg-gray-300 hover:text-cyan-600 text-xs text-right underline transition hover:decoration-blue-400 m-1">
                 Open In Explorer
               </p>
             </Link>
-
           </div>
 
           
