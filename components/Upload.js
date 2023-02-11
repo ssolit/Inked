@@ -37,7 +37,7 @@ const Upload = ({ setButtonClick, buttonClick }) => {
   };
   const onFileUpload = (e) => {
     // Create an object of formData
-  e.preventDefault();
+    e.preventDefault();
     // Details of the uploaded file
     console.log(file.selectedFile);
   };
@@ -135,17 +135,7 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                             </div>
 
 
-                            <div>
-                              <button
-                                type="submit"
-                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                              >
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                  <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-                                </span>
-                                Create
-                              </button>
-                            </div>
+
 
                             {status && <div className="text-sm">
                               <label className="font-medium text-indigo-600 hover:text-indigo-500">
@@ -160,7 +150,6 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                   </div>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  
                   <button
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
@@ -169,6 +158,18 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                   >
                     Cancel
                   </button>
+                  <button
+                    type="submit"
+                    className="group relative flex w-1/4 justify-around rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    onClick={() => { setButtonClick(false) }}
+                    ref={cancelButtonRef}
+                  >
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                      <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
+                    </span>
+                    <span>Create</span>
+                  </button>
+
                 </div>
               </Dialog.Panel>
             </Transition.Child>
