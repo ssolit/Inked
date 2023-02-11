@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ConnectToPhantom from "./ConnectToPhantom";
 
-export function NavBar() {
+export function NavBar({connected,setConnected}) {
 
   // Top Navigation Bar Element
   return (
@@ -17,16 +17,21 @@ export function NavBar() {
 
           <Link href="/">
             <Image 
-              src="logo.svg"
+              src="logo_title.svg"
               alt="logo"
-              width={100}
-              height={100}
+              width={150}
+              height={150}
             />
           </Link>
 
           </div>
 
-          <div className="flex text-sm items-center gap-6 justify-start pl-4">
+         <div className="flex text-sm items-center gap-6 justify-start pl-4">
+         {connected && <Link href="/dashboard">
+              <p className="text-white transition hover:text-white/75">
+                Dashboard
+              </p>
+            </Link>}
             <Link href="/Writer">
               <p className="text-white transition hover:text-white/75">
                 Writer.js
@@ -42,9 +47,9 @@ export function NavBar() {
 
             
 
-            <ConnectToPhantom>
+            <ConnectToPhantom connected={connected} setConnected ={setConnected} />
 
-            </ConnectToPhantom>
+          
 
 
 
