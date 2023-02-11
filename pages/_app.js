@@ -1,13 +1,18 @@
 import '../styles/globals.css'
-import { React,useState } from 'react'
+import { React, useState } from 'react'
 import { NavBar } from "../components/navBar.js";
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
   const [connected, setConnected] = useState(false);
   return (
     <>
-      <NavBar connected={connected} setConnected ={setConnected}/>  
-        <Component {...pageProps} connected={connected} setConnected ={setConnected}/>
+      <Head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </Head>
+
+      <NavBar connected={connected} setConnected={setConnected} />
+      <Component {...pageProps} connected={connected} setConnected={setConnected} />
     </>)
 }
 
