@@ -12,6 +12,12 @@ export default function dashboard({ connected, setConnected }) {
     const [settingsClick, setSettingsClick] = useState(false);
     const [publishModalIsOpen, setPublishModalIsOpen] = useState(false);
 
+    // state for buttons My Papers and Shared With Me
+    const [shareView, setShareView] = useState(false);
+    const handleClick = () => {
+        setShareView(!shareView);
+    };
+
     const openPublishModal = () => {
         setPublishModalIsOpen(true);
     };
@@ -114,17 +120,20 @@ export default function dashboard({ connected, setConnected }) {
                     </button>
                 </div>
                 <div className='p-4'>
-                    <div className='flex justify-evenly p-4'>
-                        <div>
-                            <button className='bg-gray-300 hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-sm'>
-                                My Papers
-                            </button>
-                        </div>
-                        <div>
-                            <button className='bg-gray-100 hover:bg-gray-400 text-slate-600 font-medium py-2 px-4 rounded-sm'>
-                                Shared With Me
-                            </button>
-                        </div>
+                    <div class="flex justify-evenly">
+                      <button
+                          class={(shareView ? "bg-gray-100" : "bg-gray-300") + " hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none"}
+                          onClick={handleClick}
+                        >
+                        My Papers
+                      </button>
+                      <button
+                        class={(shareView ? "bg-gray-300" : "bg-gray-100") + " hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none"}
+                        onClick={handleClick}
+                      >
+                        Shared With Me
+                      </button>
+                    </div>
                     </div>
 
                     <div className='relative '>
