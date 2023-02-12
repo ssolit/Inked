@@ -10,6 +10,13 @@ export default function dashboard({ connected, setConnected }) {
   const [buttonClick, setButtonClick] = useState(false)
   const [settingsClick, setSettingsClick] = useState(false)
 
+  // state for buttons My Papers and Shared With Me
+  const [shareView, setShareView] = useState(false);
+  const handleClick = () => {
+    setShareView(!shareView);
+  };
+
+  // sample data
   const data_array = [
     {
       hash: "hash 1",
@@ -42,16 +49,18 @@ export default function dashboard({ connected, setConnected }) {
     return (
       <div class="px-4 pt-12 pb-32 mx-auto max-w-screen-x1 sm:px-6 lg:px-8">
         <div class="flex justify-evenly">
-          <div>
-            <button class="bg-gray-300 hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none">
-              My Papers
-            </button>
-          </div>
-          <div>
-            <button class="bg-gray-100 hover:bg-gray-400 text-slate-600 font-medium py-2 px-4 rounded-none">
-              Shared With Me
-            </button>
-          </div>
+          <button
+              class={(shareView ? "bg-gray-100" : "bg-gray-300") + " hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none"}
+              onClick={handleClick}
+            >
+            My Papers
+          </button>
+          <button
+            class={(shareView ? "bg-gray-300" : "bg-gray-100") + " hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none"}
+            onClick={handleClick}
+          >
+            Shared With Me
+          </button>
         </div>
 
 
