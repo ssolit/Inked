@@ -1,35 +1,25 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 // import { json } from 'stream/consumers'
-import Upload from '../components/Upload'
-import PaperSettings from '../components/PaperSettings'
+import Upload from '../components/Upload';
+import PaperSettings from '../components/PaperSettings';
+import PublishModal from '../components/PublishModal';
 
 export default function dashboard({ connected, setConnected }) {
-  const [buttonClick, setButtonClick] = useState(false)
-  const [settingsClick, setSettingsClick] = useState(false)
+    const [buttonClick, setButtonClick] = useState(false);
+    const [settingsClick, setSettingsClick] = useState(false);
+    const [publishModalIsOpen, setPublishModalIsOpen] = useState(false);
 
-  const data_array = [
-    {
-      hash: "hash 1",
-      title: "Title 1",
-      author: "Author 1",
-      shared: ["address 1.1"],
-      reviewed: "Reviewer 1",
-      url: "https://url1.com"
-    },
-    {
-      hash: "hash 2",
-      title: "Title 2",
-      author: "Author 2",
-      shared: ["address 2.1"],
-      reviewed: "Reviewer 2",
-      url: "https://url2.com"
-    },
-  ];
+    const openPublishModal = () => {
+        setPublishModalIsOpen(true);
+    };
 
-  const [settingsClickId, setSettingsClickId] = useState(null)
+    const closePublishModal = () => {
+        setPublishModalIsOpen(false);
+    };
+
 
   if (connected === false) {
     return (
@@ -54,70 +44,196 @@ export default function dashboard({ connected, setConnected }) {
           </div>
         </div>
 
+    const [settingsClickId, setSettingsClickId] = useState(null);
 
-        <div class="relative ">
-          <button onClick={() => {
-            if (buttonClick === false) {
-              setButtonClick(true)
-            }
-
-          }} class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-none">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-            </svg>
-
-            <span>Upload</span>
-          </button>
-          {buttonClick && <Upload buttonClick={buttonClick} setButtonClick={setButtonClick} />}
-        </div>
-
-        <div>
-          <div class="mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3 drop-shadow-lg">
-            {data_array.map(item => (
-              <div class="bg-blue-100 rounded-t" key={item["hash"]}>
-                <Image class="rounded-t-lg"
-                  src="/../public/papers.jpeg"
-                  alt="papers image"
-                  width={500}
-                  height={500}
-                />
-                <div class="pt-4 mx-4">
-                  <div className="flex flex-row justify-between">
-                    <p class="text-lg font-semibold mb-2"> {item["title"]} </p>
-                    <button onClick={() => {
-                      if (settingsClick === false) {
-                        setSettingsClick(true)
-                        setSettingsClickId(item["hash"])
-                      }
-                    }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    </button>
-                    {settingsClick && 
-                    <PaperSettings key={item["hash"]} 
-                    buttonClick={settingsClick} setButtonClick={setSettingsClick} item = {item} 
-                    settingsClickId ={settingsClickId} setSettingsClickId = {setSettingsClickId}/>}
-
-                  </div >
-
-                  <p class="text-sm font-medium">Author: {item["author"]}</p>
-                  <p class="text-sm font-medium">Shared With: {item["shared"]}</p>
-                  <div class="text-center text-xs p-1 bg-gray-100 rounded-full w-3/4 mt-2 mb-2">
-                    Peer Reviewed By: {item["reviewed"]}
-                  </div>
+    if (connected === false) {
+        return <>Please Connect Phantom First</>;
+    } else {
+        return (
+            <div class='px-4 pt-12 pb-32 mx-auto max-w-screen-x1 sm:px-6 lg:px-8'>
+                <div class='flex justify-evenly'>
+                    <div>
+                        <button class='bg-gray-300 hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none'>
+                            My Papers
+                        </button>
+                    </div>
+                    <div>
+                        <button class='bg-gray-100 hover:bg-gray-400 text-slate-600 font-medium py-2 px-4 rounded-none'>
+                            Shared With Me
+                        </button>
+                    </div>
                 </div>
-                <Link href={item["url"]}>
-                  <p className="text-bg-gray-300 hover:text-cyan-600 text-xs text-right underline transition hover:decoration-blue-400 m-1">
-                    Open In Explorer
-                  </p>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    )
-  }
+
+                <div class='relative '>
+                    <button
+                        onClick={() => {
+                            if (buttonClick === false) {
+                                setButtonClick(true);
+                            }
+                        }}
+                        class='bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-none'
+                    >
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            strokeWidth={1.5}
+                            stroke='currentColor'
+                            className='w-6 h-6'
+                        >
+                            <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                d='M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5'
+                            />
+                        </svg>
+
+                        <span>Upload</span>
+                    </button>
+
+                    {buttonClick && (
+                        <Upload
+                            buttonClick={buttonClick}
+                            setButtonClick={setButtonClick}
+                        />
+                    )}
+                </div>
+
+                <div>
+                    <div class='mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3 drop-shadow-lg'>
+                        {data_array.map((item) => (
+                            <div
+                                class='bg-blue-100 rounded-t'
+                                key={item['hash']}
+                            >
+                                <Image
+                                    class='rounded-t-lg'
+                                    src='/../public/papers.jpeg'
+                                    alt='papers image'
+                                    width={500}
+                                    height={500}
+                                />
+                                <div class='pt-4 mx-4'>
+                                    <div className='flex flex-row justify-between'>
+                                        <p class='text-lg font-semibold mb-2'>
+                                            {' '}
+                                            {item['title']}{' '}
+                                        </p>
+                                        <button
+                                            onClick={() => {
+                                                if (settingsClick === false) {
+                                                    setSettingsClick(true);
+                                                    setSettingsClickId(
+                                                        item['hash']
+                                                    );
+                                                }
+                                            }}
+                                        >
+                                            <svg
+                                                fill='#000000'
+                                                height='25px'
+                                                width='25px'
+                                                version='1.1'
+                                                id='Capa_1'
+                                                xmlns='http://www.w3.org/2000/svg'
+                                                xmlnsXlink='http://www.w3.org/1999/xlink'
+                                                viewBox='0 0 328.5 328.5'
+                                                xmlSpace='preserve'
+                                            >
+                                                <g>
+                                                    <g>
+                                                        <polygon
+                                                            points='96.333,150.918 96.333,135.918 55.667,135.918 55.667,95.251 40.667,95.251 40.667,135.918 0,135.918 0,150.918
+				40.667,150.918 40.667,191.583 55.667,191.583 55.667,150.918 		'
+                                                        />
+                                                        <path
+                                                            d='M259.383,185.941H145.858c-38.111,0-69.117,31.006-69.117,69.117v39.928H328.5v-39.928
+				C328.5,216.948,297.494,185.941,259.383,185.941z M313.5,279.987H91.741v-24.928c0-29.84,24.276-54.117,54.117-54.117h113.524
+				c29.84,0,54.117,24.277,54.117,54.117L313.5,279.987L313.5,279.987z'
+                                                        />
+                                                        <path
+                                                            d='M202.621,178.84c40.066,0,72.662-32.597,72.662-72.663s-32.596-72.663-72.662-72.663s-72.663,32.596-72.663,72.663
+				S162.555,178.84,202.621,178.84z M202.621,48.515c31.795,0,57.662,25.867,57.662,57.663s-25.867,57.663-57.662,57.663
+				c-31.796,0-57.663-25.868-57.663-57.663S170.825,48.515,202.621,48.515z'
+                                                        />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <button
+                                            className='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded'
+                                            id='publishButton'
+                                            onClick={() => {
+                                                if (
+                                                    publishModalIsOpen === false
+                                                ) {
+                                                    setPublishModalIsOpen(true);
+                                                    setSettingsClickId(
+                                                        item['hash']
+                                                    );
+                                                }
+                                            }}
+                                        >
+                                            Publish
+                                        </button>
+                                        {settingsClick && (
+                                            <PaperSettings
+                                                key={item['hash']}
+                                                buttonClick={settingsClick}
+                                                setButtonClick={
+                                                    setSettingsClick
+                                                }
+                                                item={item}
+                                                settingsClickId={
+                                                    settingsClickId
+                                                }
+                                                setSettingsClickId={
+                                                    setSettingsClickId
+                                                }
+                                            />
+                                        )}
+                                        {publishModalIsOpen && (
+                                            <PublishModal
+                                                key={item['hash']}
+                                                buttonClick={publishModalIsOpen}
+                                                setButtonClick={
+                                                    setPublishModalIsOpen
+                                                }
+                                                item={item}
+                                                settingsClickId={
+                                                    settingsClickId
+                                                }
+                                                setSettingsClickId={
+                                                    setSettingsClickId
+                                                }
+                                                // pass in the name of the title of the paper
+                                                privatePaperTitle={
+                                                    item['title']
+                                                }
+                                            />
+                                        )}
+                                    </div>
+
+                                    <p class='text-sm font-medium'>
+                                        Author: {item['author']}
+                                    </p>
+                                    <p class='text-sm font-medium'>
+                                        Shared With: {item['shared']}
+                                    </p>
+                                    <div class='text-center text-xs p-1 bg-gray-100 rounded-full w-3/4 mt-2 mb-2'>
+                                        Peer Reviewed By: {item['reviewed']}
+                                    </div>
+                                </div>
+                                <Link href={item['url']}>
+                                    <p className='text-bg-gray-300 hover:text-cyan-600 text-xs text-right underline transition hover:decoration-blue-400 m-1'>
+                                        Open In Explorer
+                                    </p>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
