@@ -1,11 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
 // import { json } from 'stream/consumers'
-import Upload from '../components/Upload'
-import PaperSettings from '../components/PaperSettings'
-import DownloadHelper from '../components/DownloadHelper'
+import Upload from '../components/Upload';
+import PaperSettings from '../components/PaperSettings';
+import DownloadHelper from '../components/DownloadHelper';
 import PublishModal from '../components/PublishModal';
 import DownloadIcon from '../public/download.svg';
 
@@ -42,7 +42,7 @@ export default function dashboard({ connected, setConnected }) {
             hash: 'hash 1',
             title: 'Swarm robotic exploration of rainforest canopies',
             author: 'Vijay Kumar',
-            shared: ['address 1.1'],
+            shared: ['address DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK'],
             reviewed: 'Daniel Mellinger',
             url: 'https://url1.com',
             image: '/drone-tree.png',
@@ -51,7 +51,7 @@ export default function dashboard({ connected, setConnected }) {
             hash: 'hash 2',
             title: 'Randomized algorithms for distributed devices on IOT',
             author: 'ZP Zhong',
-            shared: ['address 2.1'],
+            shared: ['address 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv'],
             reviewed: 'SK Wang',
             url: 'https://url2.com',
             image: '/randomized-alg.png',
@@ -60,7 +60,7 @@ export default function dashboard({ connected, setConnected }) {
             hash: 'hash 3',
             title: 'Glacial lake outburst floods: 25 years of historical data',
             author: 'Nathan Katz',
-            shared: ['address 3.1'],
+            shared: ['address 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv'],
             reviewed: 'John Cho',
             url: 'https://url3.com',
             image: '/glacial-lakes.png',
