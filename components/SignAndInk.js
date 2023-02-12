@@ -22,7 +22,7 @@ const table_abstracts = "abstracts"
 const table_documents = "documents"
 const connection = new Connection(clusterApiUrl(network));
 
-const SignAndInk = ({authors, title, category, abstract, keywords, rawfile}) => {
+const SignAndInk = ({authors, title, category, abstract, keywords, rawfile,setButtonClick}) => {
 
     let publicKey_raw = null;
     let privateKey_raw = null;
@@ -225,6 +225,7 @@ const SignAndInk = ({authors, title, category, abstract, keywords, rawfile}) => 
         e.preventDefault();
         console.log("Sign and Ink")
         write()
+        setButtonClick(false)
     }
     return (
         <>
