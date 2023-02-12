@@ -83,11 +83,13 @@ const DownloadHelper = () => {
     }
 
     const connect = async () => {
-        const pub = publicKey;
+        // const pub = publicKey;
+        const pub = "weavesTYC5AttjALDadRMefaBB46bTb4CVg2j5egchKNCYpJy"
         const pvk = privateKey;
         
         
         setCurrentPhantomAccount(await getCurrentAccount());
+        console.log("currentPhantomAccount",currentPhantomAccount)
         //This message must match what's hashed on server side, changing it here should trigger changing it also in the node
         let msg = "Please sign this message to confirm you own this wallet\nThere will be no blockchain transaction or any gas fees." +
             "\n\nWallet: " + currentPhantomAccount +
@@ -104,7 +106,8 @@ const DownloadHelper = () => {
             "role": "*"
         }
 
-        
+        console.log("credentials",credentials)
+
         setPublicKey(pub);
         setPrivateKey(pvk);
         setCredentials(credentials);
@@ -115,27 +118,28 @@ const DownloadHelper = () => {
         
         
         //1. login. The login could be done only once if the nodeApi and session variables are kept in the component state
+        await connect();
         const { nodeApi, session } = await login();
-
+        
         //2. read the private document
-        // const filter = new WeaveHelper.Filter(WeaveHelper.FilterOp.eq("did", did), null, null, [ "pubkey", "did" ]);
-        // const resRead = await nodeApi.read(session, data_collection, table, filter, WeaveHelper.Options.READ_DEFAULT_NO_CHAIN)
-        const filter = new WeaveHelper.Filter(null, null, null, [ "pubkey", "did" ]) 
-        const resRead = await nodeApi.read(session, data_collection, table_abstracts, filter, WeaveHelper.Options.READ_DEFAULT_NO_CHAIN)
+        const filter = new WeaveHelper.Filter(WeaveHelper.FilterOp.eq("did", did), null, null, [ "pubkey", "did" ]);
+        const resRead = await nodeApi.read(session, data_collection, table_documents, filter, WeaveHelper.Options.READ_DEFAULT_NO_CHAIN)
+        // const filter = new WeaveHelper.Filter(null, null, null, [ "pubkey", "did" ]) 
+        // const resRead = await nodeApi.read(session, data_collection, table_documents, filter, WeaveHelper.Options.READ_DEFAULT_NO_CHAIN)
         try {
             console.log(resRead)
-            const encoded = resRead?.data ? resRead.data[0]["abstract"] : null;
+            const encoded = resRead?.data ? resRead.data[0]["document"] : null;
             if (encoded) {
-                // const access = resRead.data[0]["access"];
-                // const contract = access.split(":")[2];
-                // console.log("contract" + contract);
+                const access = resRead.data[0]["access"];
+                const contract = access.split(":")[2];
+                console.log("contract" + contract);
 
-                //3. get the hash from the solana NFT (or some contract)
-                // let connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl(network), "confirmed");
-                // const programAccount = new solanaWeb3.PublicKey(storageAccount);
-                // const accountInfo = await connection.getAccountInfo(programAccount, "confirmed");
-                // const contractData = accountInfo.data;
-                // console.log(contractData)
+                // 3. get the hash from the solana NFT (or some contract)
+                let connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl(network), "confirmed");
+                const programAccount = new solanaWeb3.PublicKey(storageAccount);
+                const accountInfo = await connection.getAccountInfo(programAccount, "confirmed");
+                const contractData = accountInfo.data;
+                console.log(contractData)
 
                 const data = new Blob([ Buffer.from(encoded, "base64") ], { type: "application/pdf" });
                 const checksum = SHA256(data).toString();
