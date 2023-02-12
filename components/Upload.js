@@ -228,7 +228,7 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                     Cancel
                   </button>
              
-                  <SignAndInk rawfile = {file}/>
+                  <SignAndInk rawfile = {file} authors={authors} title={title} category={category} abstract={abstract} keywords={keywords}/>
 
                 </div>
               </Dialog.Panel>
