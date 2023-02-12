@@ -10,7 +10,16 @@ import { Connection, clusterApiUrl, Keypair } from "@solana/web3.js";
 import { base58_to_binary, binary_to_base58 } from "base58-js";
 const Buffer = require("buffer").Buffer;
 
+const sideChain = "https://public.weavechain.com:443/92f30f0b6be2732cb817c19839b0940c";
+//const sideChain = "http://localhost:18080/92f30f0b6be2732cb817c19839b0940c";
 
+const authChain = "solana";
+const network = "devnet"; //"testnet";
+
+const organization = "weavedemo";
+const data_collection = "inked";
+const table_abstracts = "abstracts"
+const table_documents = "documents"
 const connection = new Connection(clusterApiUrl(network));
 
 const SignAndInk = ({authors, title, category, abstract, keywords, nftAddress, rawfile, thumbnail, onSign}) => {
