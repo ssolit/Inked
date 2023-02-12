@@ -13,6 +13,12 @@ export default function dashboard({ connected, setConnected }) {
     const [settingsClick, setSettingsClick] = useState(false);
     const [publishModalIsOpen, setPublishModalIsOpen] = useState(false);
 
+    // state for buttons My Papers and Shared With Me
+    const [shareView, setShareView] = useState(false);
+    const handleClick = () => {
+        setShareView(!shareView);
+    };
+
     const openPublishModal = () => {
         setPublishModalIsOpen(true);
     };
@@ -62,41 +68,39 @@ export default function dashboard({ connected, setConnected }) {
 
     if (connected === false) {
         return (
-            <div class='bg-[url(../public/Pen1.jpeg)] h-screen opacity-75 '>
-                <p class='text-[72px] text-center align-middle mt-10'>
+            <div className='h-screen opacity-75 '>
+                <p className='text-[72px] text-center align-middle mt-10 text-orange-800'>
                     {' '}
                     Welcome to Inked!
                 </p>
-                <p class='text-[72px] text-center align-middle'>
+
+                <p className='text-[36px] text-center align-middle text-orange-900'>
                     {' '}
                     Please connect your Phantom wallet to continue.{' '}
                 </p>
+                <Image
+                    className='mx-auto mt-10'
+                    src='/phantom-icon.png'
+                    alt='phantom wallet'
+                    width={300}
+                    height={300}
+                />
             </div>
         );
     } else {
         return (
-            <div class='px-4 pt-12 pb-32 mx-auto max-w-screen-x1 sm:px-6 lg:px-8'>
-                <div class='flex justify-evenly'>
-                    <div>
-                        <button class='bg-gray-300 hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none'>
-                            My Papers
-                        </button>
-                    </div>
-                    <div>
-                        <button class='bg-gray-100 hover:bg-gray-400 text-slate-600 font-medium py-2 px-4 rounded-none'>
-                            Shared With Me
-                        </button>
-                    </div>
-                </div>
-                <DownloadHelper />
-                <div class='relative '>
+            <div className='px-4 pt-12 pb-32 mx-auto max-w-screen-x1 sm:px-6 lg:px-8'>
+                <div className='flex flex-row justify-between rounded-sm p-4 border-4'>
+                    <h1 className='text-black font-medium text-[36px]'>
+                        Inked Paper Dashboard
+                    </h1>
                     <button
                         onClick={() => {
                             if (buttonClick === false) {
                                 setButtonClick(true);
                             }
                         }}
-                        class='bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-none'
+                        className='bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-sm'
                     >
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
@@ -104,7 +108,7 @@ export default function dashboard({ connected, setConnected }) {
                             viewBox='0 0 24 24'
                             strokeWidth={1.5}
                             stroke='currentColor'
-                            className='w-6 h-6'
+                            classNameName='w-6 h-6'
                         >
                             <path
                                 strokeLinecap='round'
@@ -115,150 +119,175 @@ export default function dashboard({ connected, setConnected }) {
 
                         <span>Upload</span>
                     </button>
-
-                    {buttonClick && (
-                        <Upload
-                            buttonClick={buttonClick}
-                            setButtonClick={setButtonClick}
-                        />
-                    )}
                 </div>
+                <div className='p-4'>
+                    <div class="flex justify-evenly">
+                      <button
+                          class={(shareView ? "bg-gray-100" : "bg-gray-300") + " hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none"}
+                          onClick={handleClick}
+                        >
+                        My Papers
+                      </button>
+                      <button
+                        class={(shareView ? "bg-gray-300" : "bg-gray-100") + " hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none"}
+                        onClick={handleClick}
+                      >
+                        Shared With Me
+                      </button>
+                    </div>
+                    </div>
 
-                <div>
-                    <div class='mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3 drop-shadow-lg'>
-                        {data_array.map((item) => (
-                            <div
-                                class='bg-blue-100 rounded-t'
-                                key={item['hash']}
-                            >
-                                <Image
-                                    class='rounded-t-lg'
-                                    src={item['image']}
-                                    alt='papers image'
-                                    width={500}
-                                    height={500}
-                                />
-                                <div class='pt-4 mx-4'>
-                                    <div className='flex flex-row justify-between'>
-                                        <p class='text-lg font-semibold mb-2'>
-                                            {' '}
-                                            {item['title']}{' '}
-                                        </p>
-                                        <button
-                                            onClick={() => {
-                                                if (settingsClick === false) {
-                                                    setSettingsClick(true);
-                                                    setSettingsClickId(
-                                                        item['hash']
-                                                    );
-                                                }
-                                            }}
-                                        >
-                                            <svg
-                                                fill='#000000'
-                                                height='25px'
-                                                width='25px'
-                                                version='1.1'
-                                                id='Capa_1'
-                                                xmlns='http://www.w3.org/2000/svg'
-                                                xmlnsXlink='http://www.w3.org/1999/xlink'
-                                                viewBox='0 0 328.5 328.5'
-                                                xmlSpace='preserve'
+                    <div className='relative '>
+                        {buttonClick && (
+                            <Upload
+                                buttonClick={buttonClick}
+                                setButtonClick={setButtonClick}
+                            />
+                        )}
+                    </div>
+
+                    <div>
+                        <div className='mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3 drop-shadow-lg'>
+                            {data_array.map((item) => (
+                                <div
+                                    className='bg-blue-100 rounded-t'
+                                    key={item['hash']}
+                                >
+                                    <Image
+                                        className='rounded-t-lg'
+                                        src={item['image']}
+                                        alt='papers image'
+                                        width={500}
+                                        height={500}
+                                    />
+                                    <div className='pt-4 mx-4'>
+                                        <div classNameName='flex flex-row justify-between'>
+                                            <p className='text-lg font-semibold mb-2'>
+                                                {' '}
+                                                {item['title']}{' '}
+                                            </p>
+                                            <button
+                                                onClick={() => {
+                                                    if (
+                                                        settingsClick === false
+                                                    ) {
+                                                        setSettingsClick(true);
+                                                        setSettingsClickId(
+                                                            item['hash']
+                                                        );
+                                                    }
+                                                }}
                                             >
-                                                <g>
+                                                <svg
+                                                    fill='#000000'
+                                                    height='25px'
+                                                    width='25px'
+                                                    version='1.1'
+                                                    id='Capa_1'
+                                                    xmlns='http://www.w3.org/2000/svg'
+                                                    xmlnsXlink='http://www.w3.org/1999/xlink'
+                                                    viewBox='0 0 328.5 328.5'
+                                                    xmlSpace='preserve'
+                                                >
                                                     <g>
-                                                        <polygon
-                                                            points='96.333,150.918 96.333,135.918 55.667,135.918 55.667,95.251 40.667,95.251 40.667,135.918 0,135.918 0,150.918
+                                                        <g>
+                                                            <polygon
+                                                                points='96.333,150.918 96.333,135.918 55.667,135.918 55.667,95.251 40.667,95.251 40.667,135.918 0,135.918 0,150.918
 				40.667,150.918 40.667,191.583 55.667,191.583 55.667,150.918 		'
-                                                        />
-                                                        <path
-                                                            d='M259.383,185.941H145.858c-38.111,0-69.117,31.006-69.117,69.117v39.928H328.5v-39.928
+                                                            />
+                                                            <path
+                                                                d='M259.383,185.941H145.858c-38.111,0-69.117,31.006-69.117,69.117v39.928H328.5v-39.928
 				C328.5,216.948,297.494,185.941,259.383,185.941z M313.5,279.987H91.741v-24.928c0-29.84,24.276-54.117,54.117-54.117h113.524
 				c29.84,0,54.117,24.277,54.117,54.117L313.5,279.987L313.5,279.987z'
-                                                        />
-                                                        <path
-                                                            d='M202.621,178.84c40.066,0,72.662-32.597,72.662-72.663s-32.596-72.663-72.662-72.663s-72.663,32.596-72.663,72.663
+                                                            />
+                                                            <path
+                                                                d='M202.621,178.84c40.066,0,72.662-32.597,72.662-72.663s-32.596-72.663-72.662-72.663s-72.663,32.596-72.663,72.663
 				S162.555,178.84,202.621,178.84z M202.621,48.515c31.795,0,57.662,25.867,57.662,57.663s-25.867,57.663-57.662,57.663
 				c-31.796,0-57.663-25.868-57.663-57.663S170.825,48.515,202.621,48.515z'
-                                                        />
+                                                            />
+                                                        </g>
                                                     </g>
-                                                </g>
-                                            </svg>
-                                        </button>
-                                        <button
-                                            className='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded ml-6'
-                                            id='publishButton'
-                                            onClick={() => {
-                                                if (
-                                                    publishModalIsOpen === false
-                                                ) {
-                                                    setPublishModalIsOpen(true);
-                                                    setSettingsClickId(
-                                                        item['hash']
-                                                    );
-                                                }
-                                            }}
-                                        >
-                                            Publish
-                                        </button>
-                                        {settingsClick && (
-                                            <PaperSettings
-                                                key={item['hash']}
-                                                buttonClick={settingsClick}
-                                                setButtonClick={
-                                                    setSettingsClick
-                                                }
-                                                item={item}
-                                                settingsClickId={
-                                                    settingsClickId
-                                                }
-                                                setSettingsClickId={
-                                                    setSettingsClickId
-                                                }
-                                            />
-                                        )}
-                                        {publishModalIsOpen && (
-                                            <PublishModal
-                                                key={item['hash']}
-                                                buttonClick={publishModalIsOpen}
-                                                setButtonClick={
-                                                    setPublishModalIsOpen
-                                                }
-                                                item={item}
-                                                settingsClickId={
-                                                    settingsClickId
-                                                }
-                                                setSettingsClickId={
-                                                    setSettingsClickId
-                                                }
-                                                // pass in the name of the title of the paper
-                                                privatePaperTitle={
-                                                    item['title']
-                                                }
-                                            />
-                                        )}
-                                    </div>
+                                                </svg>
+                                            </button>
+                                            <button
+                                                classNameName='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded ml-6'
+                                                id='publishButton'
+                                                onClick={() => {
+                                                    if (
+                                                        publishModalIsOpen ===
+                                                        false
+                                                    ) {
+                                                        setPublishModalIsOpen(
+                                                            true
+                                                        );
+                                                        setSettingsClickId(
+                                                            item['hash']
+                                                        );
+                                                    }
+                                                }}
+                                            >
+                                                Publish
+                                            </button>
+                                            {settingsClick && (
+                                                <PaperSettings
+                                                    key={item['hash']}
+                                                    buttonClick={settingsClick}
+                                                    setButtonClick={
+                                                        setSettingsClick
+                                                    }
+                                                    item={item}
+                                                    settingsClickId={
+                                                        settingsClickId
+                                                    }
+                                                    setSettingsClickId={
+                                                        setSettingsClickId
+                                                    }
+                                                />
+                                            )}
+                                            {publishModalIsOpen && (
+                                                <PublishModal
+                                                    key={item['hash']}
+                                                    buttonClick={
+                                                        publishModalIsOpen
+                                                    }
+                                                    setButtonClick={
+                                                        setPublishModalIsOpen
+                                                    }
+                                                    item={item}
+                                                    settingsClickId={
+                                                        settingsClickId
+                                                    }
+                                                    setSettingsClickId={
+                                                        setSettingsClickId
+                                                    }
+                                                    // pass in the name of the title of the paper
+                                                    privatePaperTitle={
+                                                        item['title']
+                                                    }
+                                                />
+                                            )}
+                                        </div>
 
-                                    <p class='text-sm font-medium'>
-                                        Author: {item['author']}
-                                    </p>
-                                    <p class='text-sm font-medium'>
-                                        Shared With: {item['shared']}
-                                    </p>
-                                    <div class='text-center text-xs p-1 bg-gray-100 rounded-full w-3/4 mt-2 mb-2'>
-                                        Peer Reviewed By: {item['reviewed']}
+                                        <p className='text-sm font-medium'>
+                                            Author: {item['author']}
+                                        </p>
+                                        <p className='text-sm font-medium'>
+                                            Shared With: {item['shared']}
+                                        </p>
+                                        <div className='text-center text-xs p-1 bg-gray-100 rounded-full w-3/4 mt-2 mb-2'>
+                                            Peer Reviewed By: {item['reviewed']}
+                                        </div>
                                     </div>
+                                    <Link href={item['url']}>
+                                        <p classNameName='text-bg-gray-300 hover:text-cyan-600 text-xs text-right underline transition hover:decoration-blue-400 m-1'>
+                                            Open In Explorer
+                                        </p>
+                                    </Link>
                                 </div>
-                                <Link href={item['url']}>
-                                    <p className='text-bg-gray-300 hover:text-cyan-600 text-xs text-right underline transition hover:decoration-blue-400 m-1'>
-                                        Open In Explorer
-                                    </p>
-                                </Link>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
         );
     }
 }
