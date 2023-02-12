@@ -212,11 +212,11 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                 console.log("resWrite"+resWrite)
 
                 setSuccess(true);
-                setMessage("Document published");
+                setMessage("Document Inked");
             } catch (e) {
                 console.log(e);
                 setSuccess(false);
-                setMessage("Failed publishing document");
+                setMessage("Failed inking document");
             }
         }
         console.log("Done writing private info")
@@ -364,7 +364,7 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                                                                 htmlFor='title'
                                                                 className='sr-only'
                                                             >
-                                                                Enter Titlt
+                                                                Enter Title
                                                             </label>
                                                             <input
                                                                 id='title'
