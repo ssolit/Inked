@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 // import { json } from 'stream/consumers'
 import Upload from '../components/Upload'
 import PaperSettings from '../components/PaperSettings'
+import DownloadHelper from '../components/DownloadHelper'
 
 export default function dashboard({ connected, setConnected }) {
   const [buttonClick, setButtonClick] = useState(false)
@@ -17,12 +18,12 @@ export default function dashboard({ connected, setConnected }) {
       console.log(json)
     }
     fetchData()
-  
+
     return () => {
       console.log("unmounting")
     }
-  }, [third])
-  
+  }, [])
+
   const data_array = [
     {
       hash: "hash 1",
@@ -43,6 +44,7 @@ export default function dashboard({ connected, setConnected }) {
   ];
 
   const [settingsClickId, setSettingsClickId] = useState(null)
+ 
 
   if (connected === false) {
     return (
@@ -66,7 +68,7 @@ export default function dashboard({ connected, setConnected }) {
             </button>
           </div>
         </div>
-
+        <DownloadHelper/>
 
         <div class="relative ">
           <button onClick={() => {
@@ -81,11 +83,13 @@ export default function dashboard({ connected, setConnected }) {
 
             <span>Upload</span>
           </button>
+          
           {buttonClick && <Upload buttonClick={buttonClick} setButtonClick={setButtonClick} />}
         </div>
 
         <div>
           <div class="mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3 drop-shadow-lg">
+          
             {data_array.map(item => (
               <div class="bg-blue-100 rounded-t" key={item["hash"]}>
                 <Image class="rounded-t-lg"
@@ -108,10 +112,12 @@ export default function dashboard({ connected, setConnected }) {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
                     </button>
-                    {settingsClick && 
-                    <PaperSettings key={item["hash"]} 
-                    buttonClick={settingsClick} setButtonClick={setSettingsClick} item = {item} 
-                    settingsClickId ={settingsClickId} setSettingsClickId = {setSettingsClickId}/>}
+                    
+                   
+                    {settingsClick &&
+                      <PaperSettings key={item["hash"]}
+                        buttonClick={settingsClick} setButtonClick={setSettingsClick} item={item}
+                        settingsClickId={settingsClickId} setSettingsClickId={setSettingsClickId} />}
 
                   </div >
 
