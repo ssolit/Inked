@@ -754,9 +754,9 @@ c-31.796,0-57.663-25.868-57.663-57.663S170.825,48.515,202.621,48.515z'
                         <div className='mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3 drop-shadow-lg'>
                             {shareView
                                 ? mapMock(shared_array)
-                                : mapMock(data_array, false)}
+                                : null }
                             {shareView
-                                ? null // mapReal(sharedDocuments)
+                                ? mapMock(data_array, false) // mapReal(sharedDocuments)
                                 : mapReal(myDocuments)
                             }
                         </div>
