@@ -18,7 +18,6 @@ const table_documents = "documents"
 
 const storageAccount = "EiG3thMCVKXKMAKD2ryQvRqx3pEb2ZxjBdRkDQ7At2na"; //The program storage account that keeps the hashes association
 
-
 class Reader extends Component {
     constructor(props) {
         super(props);
@@ -48,6 +47,7 @@ class Reader extends Component {
             did: "did:inked:123456789abcdef",
             success: false,
             message: null,
+            readData: null,
             error: null
         };
     }
@@ -131,6 +131,9 @@ class Reader extends Component {
                 // pubkey - publisher key
                 // document details: did, title, abstract, authors, category, keywords
                 console.log(resRead.data);
+                this.setState({
+                    readData: resRead.data,
+                })
             } else {
                 //error
                 console.log(resRead);
@@ -212,10 +215,11 @@ class Reader extends Component {
         const {
             did,
             success,
-            message
+            message,
+            readData
         } = this.state;
 
-        return <section className="bg-white min-h-screen">
+        return <section className="bg-teal-50 min-h-screen">
             <header className="items-center justify-between pt-12">
                 <h1 className="mx-auto text-center pb-2 text-5xl font-extrabold font-mono text-gray-800">
                     Access a document
@@ -248,6 +252,11 @@ class Reader extends Component {
                         {message ? <>
                             <span style={{color: success ? "green" : "red", whiteSpace: "pre-line"}}>{message}</span>
                         </> : null}
+
+                        {JSON.stringify(readData) ? <>
+                            <span>{JSON.stringify(readData)}</span>
+                        </> : ""}
+
                         <br />
                         <br />
 
