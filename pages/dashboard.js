@@ -34,6 +34,7 @@ export default function dashboard({ connected, setConnected }) {
     const closePublishModal = () => {
         setPublishModalIsOpen(false);
     };
+
     const [settingsClickId, setSettingsClickId] = useState(null);
     const data_array = [
         {
@@ -133,16 +134,24 @@ export default function dashboard({ connected, setConnected }) {
                 </div>
                 <div class='p-4'>
                     <div class='flex justify-evenly p-4'>
-                        <div>
-                            <button class='bg-gray-300 hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-sm'>
-                                My Papers
-                            </button>
-                        </div>
-                        <div>
-                            <button class='bg-gray-100 hover:bg-gray-400 text-slate-600 font-medium py-2 px-4 rounded-sm'>
-                                Shared With Me
-                            </button>
-                        </div>
+                        <button
+                            class={
+                                (shareView ? 'bg-gray-100' : 'bg-gray-300') +
+                                ' hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none'
+                            }
+                            onClick={handleClick}
+                        >
+                            My Papers
+                        </button>
+                        <button
+                            class={
+                                (shareView ? 'bg-gray-300' : 'bg-gray-100') +
+                                ' hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none'
+                            }
+                            onClick={handleClick}
+                        >
+                            Shared With Me
+                        </button>
                     </div>
 
                     <div class='relative '>
