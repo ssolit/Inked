@@ -12,6 +12,7 @@ const Upload = ({ setButtonClick, buttonClick }) => {
     const [category, setCategory] = useState('');
     const [abstract, setAbstract] = useState('');
     const [keywords, setKeywords] = useState('');
+    const [nftAddress, setNftAddress] = useState('');
     const [file, setFile] = useState('');
     const [thumbnail, setThumbnail] = useState('');
 
@@ -265,6 +266,30 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                                                             </div>
                                                         </div>
                                                         <div>
+                                                            <h2>NFT Address</h2>
+                                                            <label
+                                                                htmlFor='title'
+                                                                className='sr-only'
+                                                            >
+                                                                NFT Address
+                                                            </label>
+                                                            <input
+                                                                id='nftAddress'
+                                                                name='nftAddress'
+                                                                type='text'
+                                                                autoComplete='text'
+                                                                required
+                                                                className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
+                                                                placeholder='ex. AXT9R69MVvtxhhLiGAF78ziXBRiC37qAsKYkM1Whm1wg'
+                                                                onChange={(e) =>
+                                                                    setNftAddress(
+                                                                        e.target
+                                                                            .value
+                                                                    )
+                                                                }
+                                                            />
+                                                        </div>
+                                                        <div>
                                                             <h2>Upload File</h2>
                                                             <label
                                                                 htmlFor='upload'
@@ -313,7 +338,7 @@ const Upload = ({ setButtonClick, buttonClick }) => {
                                         Cancel
                                     </button>
 
-                                    <SignAndInk rawfile={file} />
+                                    <SignAndInk rawfile={file} authors={authors} title={title} category={category} abstract={abstract} keywords={keywords} nftAddress={nftAddress} />
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>

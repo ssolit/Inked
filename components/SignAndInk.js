@@ -22,7 +22,7 @@ const table_abstracts = "abstracts"
 const table_documents = "documents"
 const connection = new Connection(clusterApiUrl(network));
 
-const SignAndInk = ({authors, title, category, abstract, keywords, rawfile}) => {
+const SignAndInk = ({authors, title, category, abstract, keywords, nftAddress, rawfile}) => {
 
     let publicKey_raw = null;
     let privateKey_raw = null;
@@ -129,6 +129,7 @@ const SignAndInk = ({authors, title, category, abstract, keywords, rawfile}) => 
                     category,
                     abstract,
                     keywords,
+                    nftAddress,
                     location
                 ]
             ];
@@ -219,7 +220,7 @@ const SignAndInk = ({authors, title, category, abstract, keywords, rawfile}) => 
         console.log(success)
         console.log(message)
         console.log(authors)
-        console.log(title)
+        console.log(nftAddress)
     }
     const handleButtonClick = async (e) => {
         e.preventDefault();
