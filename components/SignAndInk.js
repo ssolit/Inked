@@ -22,7 +22,7 @@ const table_abstracts = "abstracts"
 const table_documents = "documents"
 const connection = new Connection(clusterApiUrl(network));
 
-const SignAndInk = ({rawfile}) => {
+const SignAndInk = ({authors, title, category, abstract, keywords, rawfile}) => {
 
     let publicKey_raw = null;
     let privateKey_raw = null;
@@ -54,11 +54,6 @@ const SignAndInk = ({rawfile}) => {
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState(null);
 
-    const [authors, setAuthors] = useState("Xiang-Xiang Sun, Lu Guo");
-    const [title, setTitle] = useState("Microscopic study of the compound nucleus formation in cold-fusion reactions");
-    const [category, setCategory] = useState("Nuclear Theory");
-    const [abstract, setAbstract] = useState("The understanding of the fusion probability is of particular importance to reveal the mechanism of producing superheavy elements. We present a microscopic study of the compound nucleus formation by combining time-dependent density functional theory, coupled-channels approach, and dynamical diffusion models. The fusion probability and compound nucleus formation cross sections for cold-fusion reactions 48Ca+208Pb, 50Ti+208Pb, and 54Cr+208Pb are investigated and it is found that the deduced capture barriers, capture cross sections for these reactions are consistent with experimental data. Above the capture barrier, our calculations reproduce the measured fusion probability reasonably well. Our studies demonstrate that the restrictions from the microscopic dynamic theory improve the predictive power of the coupled-channels and diffusion calculations.");
-    const [keywords, setKeywords] = useState("Cold Fusion, Nuclear, Physics");
 
   
     const getCurrentAccount = async () => {
@@ -223,6 +218,8 @@ const SignAndInk = ({rawfile}) => {
         console.log("Done writing private info")
         console.log(success)
         console.log(message)
+        console.log(authors)
+        console.log(title)
     }
     const handleButtonClick = async (e) => {
         e.preventDefault();
