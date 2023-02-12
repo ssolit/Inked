@@ -72,7 +72,7 @@ export default function dashboard({ connected, setConnected }) {
             hash: 'hash 4',
             title: 'Momentum trading disproved: backtest 12 years',
             author: 'Cliff Assness',
-            shared: ['address 4.1'],
+            shared: ['address DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK'],
             reviewed: 'Gad Allon',
             url: 'https://url4.com',
             image: '/momentum-trading.png',
