@@ -19,35 +19,39 @@ export default function dashboard({ connected, setConnected }) {
     const closePublishModal = () => {
         setPublishModalIsOpen(false);
     };
-
-
-  if (connected === false) {
-    return (
-      <div class="bg-[url(../public/Pen1.jpeg)] h-screen opacity-75 ">
-        <p class="text-[72px] text-center align-middle mt-10"> Welcome to Inked!</p>
-        <p class="text-[72px] text-center align-middle"> Please connect your Phantom wallet to continue. </p>
-      </div>
-    )
-  } else {
-    return (
-      <div class="px-4 pt-12 pb-32 mx-auto max-w-screen-x1 sm:px-6 lg:px-8">
-        <div class="flex justify-evenly">
-          <div>
-            <button class="bg-gray-300 hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-none">
-              My Papers
-            </button>
-          </div>
-          <div>
-            <button class="bg-gray-100 hover:bg-gray-400 text-slate-600 font-medium py-2 px-4 rounded-none">
-              Shared With Me
-            </button>
-          </div>
-        </div>
-
     const [settingsClickId, setSettingsClickId] = useState(null);
+    const data_array = [
+        {
+            hash: 'hash 1',
+            title: 'Title 1',
+            author: 'Author 1',
+            shared: ['address 1.1'],
+            reviewed: 'Reviewer 1',
+            url: 'https://url1.com',
+        },
+        {
+            hash: 'hash 2',
+            title: 'Title 2',
+            author: 'Author 2',
+            shared: ['address 2.1'],
+            reviewed: 'Reviewer 2',
+            url: 'https://url2.com',
+        },
+    ];
 
     if (connected === false) {
-        return <>Please Connect Phantom First</>;
+        return (
+            <div class='bg-[url(../public/Pen1.jpeg)] h-screen opacity-75 '>
+                <p class='text-[72px] text-center align-middle mt-10'>
+                    {' '}
+                    Welcome to Inked!
+                </p>
+                <p class='text-[72px] text-center align-middle'>
+                    {' '}
+                    Please connect your Phantom wallet to continue.{' '}
+                </p>
+            </div>
+        );
     } else {
         return (
             <div class='px-4 pt-12 pb-32 mx-auto max-w-screen-x1 sm:px-6 lg:px-8'>
