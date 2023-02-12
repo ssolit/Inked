@@ -132,6 +132,9 @@ class Writer extends Component {
 
         //2. write public info
         {
+            const image = document.querySelector('#uploaded_image').files[0];
+            const encoded_image = await toBase64(image);
+
             const items = [
                 [
                     null, //_id, filled server side
@@ -143,6 +146,7 @@ class Writer extends Component {
                     title,
                     category,
                     abstract,
+                    encoded_image,
                     keywords,
                     location
                 ]
@@ -267,6 +271,10 @@ class Writer extends Component {
                     <label>File</label>
                     <br/>
                     <input type="file" name="uploaded_file" id="uploaded_file" />
+                    <br />
+                    <label>Image</label>
+                    <br />
+                    <input type="file" name="uploaded_image" id="uploaded_image" />
                     <br />
                     <br />
 

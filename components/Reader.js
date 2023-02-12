@@ -14,9 +14,7 @@ const network = "testnet";
 
 const organization = "weavedemo";
 const data_collection = "inked";
-const table  = "documents"
-
-const storageAccount = "EiG3thMCVKXKMAKD2ryQvRqx3pEb2ZxjBdRkDQ7At2na"; //The program storage account that keeps the hashes association
+const table = "documents"
 
 const { ethereum } = window;
 
@@ -120,6 +118,7 @@ class Reader extends Component {
         //2. read the private document
         const filter = new WeaveHelper.Filter(WeaveHelper.FilterOp.eq("did", did), null, null, [ "pubkey", "did" ]);
         const resRead = await nodeApi.read(session, data_collection, table, filter, WeaveHelper.Options.READ_DEFAULT_NO_CHAIN)
+        console.log(resRead)
 
         try {
             const encoded = resRead?.data ? resRead.data[0]["document"] : null;
@@ -129,11 +128,6 @@ class Reader extends Component {
                 console.log(contract);
 
                 //3. get the hash from the solana NFT (or some contract)
-                let connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl(network), "confirmed");
-                const programAccount = new solanaWeb3.PublicKey(storageAccount);
-                const accountInfo = await connection.getAccountInfo(programAccount, "confirmed");
-                const contractData = accountInfo.data;
-                console.log(contractData)
 
                 const data = new Blob([ Buffer.from(encoded, "base64") ], { type: "application/pdf" });
                 const checksum = SHA256(data).toString();
