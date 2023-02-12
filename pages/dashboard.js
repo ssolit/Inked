@@ -23,19 +23,39 @@ export default function dashboard({ connected, setConnected }) {
     const data_array = [
         {
             hash: 'hash 1',
-            title: 'Title 1',
-            author: 'Author 1',
+            title: 'Swarm robotic exploration of rainforest canopies',
+            author: 'Vijay Kumar',
             shared: ['address 1.1'],
-            reviewed: 'Reviewer 1',
+            reviewed: 'Daniel Mellinger',
             url: 'https://url1.com',
+            image: '/drone-tree.png',
         },
         {
             hash: 'hash 2',
-            title: 'Title 2',
-            author: 'Author 2',
+            title: 'Randomized algorithms for distributed devices',
+            author: 'ZP Zhong',
             shared: ['address 2.1'],
-            reviewed: 'Reviewer 2',
+            reviewed: 'SK Wang',
             url: 'https://url2.com',
+            image: '/randomized-alg.png',
+        },
+        {
+            hash: 'hash 3',
+            title: 'Glacial lake outburst floods: a review of the past 50 years',
+            author: 'Nathan Katz',
+            shared: ['address 3.1'],
+            reviewed: 'John Cho',
+            url: 'https://url3.com',
+            image: '/glacial-lakes.png',
+        },
+        {
+            hash: 'hash 4',
+            title: 'Momentum trading disproved: backtest 12 years',
+            author: 'Cliff Assness',
+            shared: ['address 4.1'],
+            reviewed: 'Gad Allon',
+            url: 'https://url4.com',
+            image: '/momentum-trading.png',
         },
     ];
 
@@ -112,7 +132,7 @@ export default function dashboard({ connected, setConnected }) {
                             >
                                 <Image
                                     class='rounded-t-lg'
-                                    src='/../public/papers.jpeg'
+                                    src={item['image']}
                                     alt='papers image'
                                     width={500}
                                     height={500}
@@ -165,7 +185,7 @@ export default function dashboard({ connected, setConnected }) {
                                             </svg>
                                         </button>
                                         <button
-                                            className='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded'
+                                            className='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded ml-6'
                                             id='publishButton'
                                             onClick={() => {
                                                 if (
