@@ -716,7 +716,7 @@ c-31.796,0-57.663-25.868-57.663-57.663S170.825,48.515,202.621,48.515z'
                             />
                         </svg>
 
-                        <span className='text-[18px] ml-2 mt-1'>Upload</span>
+                        <span className='text-[18px] ml-2 mt-1'>Ink</span>
                     </button>
                 </div>
                 <div className='p-4'>

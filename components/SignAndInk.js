@@ -35,12 +35,12 @@ const SignAndInk = ({authors, title, category, abstract, keywords, nftAddress, r
         <>
             <button
                 type="submit"
-                className="group relative flex w-1/2 justify-around rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="group relative flex w-1/2 justify-around rounded-md border border-transparent bg-orange-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 onClick={handleButtonClick}
                 ref={null}
             >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
+                    <LockClosedIcon className="h-5 w-5 text-white" aria-hidden="true" />
                 </span>
                 <span>Sign and Ink</span>
             </button>
