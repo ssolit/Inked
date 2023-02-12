@@ -59,12 +59,14 @@ const DownloadHelper = () => {
     const [category, setCategory] = useState("Nuclear Theory");
     const [abstract, setAbstract] = useState("The understanding of the fusion probability is of particular importance to reveal the mechanism of producing superheavy elements. We present a microscopic study of the compound nucleus formation by combining time-dependent density functional theory, coupled-channels approach, and dynamical diffusion models. The fusion probability and compound nucleus formation cross sections for cold-fusion reactions 48Ca+208Pb, 50Ti+208Pb, and 54Cr+208Pb are investigated and it is found that the deduced capture barriers, capture cross sections for these reactions are consistent with experimental data. Above the capture barrier, our calculations reproduce the measured fusion probability reasonably well. Our studies demonstrate that the restrictions from the microscopic dynamic theory improve the predictive power of the coupled-channels and diffusion calculations.");
     const [keywords, setKeywords] = useState("Cold Fusion, Nuclear, Physics");
-    const [did,setDid] = useState("")
+    const [did,setDid] = useState("did:inked:test1")
 
   
     const getCurrentAccount = async () => {
         const response = await window.solana.connect();
-        setCurrentPhantomAccount(response.publicKey.toString());
+        const pubkeyyy = response.publicKey.toString();
+        console.log(pubkeyyy)
+        setCurrentPhantomAccount(pubkeyyy);
     }
     const login = async () => {
         const pub = publicKey;
@@ -84,11 +86,12 @@ const DownloadHelper = () => {
 
     const connect = async () => {
         // const pub = publicKey;
-        const pub = "weavesTYC5AttjALDadRMefaBB46bTb4CVg2j5egchKNCYpJy"
+        const pub = publicKey;
+        console.log("publicKey",publicKey)
         const pvk = privateKey;
         
         
-        setCurrentPhantomAccount(await getCurrentAccount());
+        await getCurrentAccount()
         console.log("currentPhantomAccount",currentPhantomAccount)
         //This message must match what's hashed on server side, changing it here should trigger changing it also in the node
         let msg = "Please sign this message to confirm you own this wallet\nThere will be no blockchain transaction or any gas fees." +

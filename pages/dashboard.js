@@ -88,7 +88,7 @@ export default function dashboard({ connected, setConnected }) {
                         </button>
                     </div>
                 </div>
-
+                <DownloadHelper />
                 <div class='relative '>
                     <button
                         onClick={() => {
