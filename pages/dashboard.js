@@ -1,10 +1,11 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
 // import { json } from 'stream/consumers'
-import Upload from '../components/Upload';
-import PaperSettings from '../components/PaperSettings';
+import Upload from '../components/Upload'
+import PaperSettings from '../components/PaperSettings'
+import DownloadHelper from '../components/DownloadHelper'
 import PublishModal from '../components/PublishModal';
 
 export default function dashboard({ connected, setConnected }) {
