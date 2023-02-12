@@ -31,20 +31,6 @@ export function NavBar({connected,setConnected}) {
                 Dashboard
               </p>
             </Link>}
-            <Link href="/Writer">
-              <p className="text-white transition hover:text-white/75">
-                Writer.js
-              </p>
-            </Link>
-
-            <Link href="/Reader">
-              <p className="text-white transition hover:text-white/75">
-                Reader.js
-              </p>
-            </Link>
-
-
-            
 
             <ConnectToPhantom connected={connected} setConnected ={setConnected} key={connected} />
 

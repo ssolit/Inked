@@ -207,17 +207,17 @@ export default function dashboard({ connected, setConnected }) {
         },
     ];
 
-    // const shared_array = [
-    //     {
-    //         hash: 'hash 4',
-    //         title: 'Momentum trading disproved: backtest 12 years',
-    //         author: 'Cliff Assness',
-    //         shared: ['address 4.1'],
-    //         reviewed: 'Gad Allon',
-    //         url: 'https://url4.com',
-    //         image: '/momentum-trading.png',
-    //     },
-    // ];
+    const shared_array = [
+        {
+            hash: 'hash 4',
+            title: 'Momentum trading disproved: backtest 12 years',
+            author: 'Cliff Assness',
+            shared: ['address 4.1'],
+            reviewed: 'Gad Allon',
+            url: 'https://url4.com',
+            image: '/momentum-trading.png',
+        },
+    ];
 
     // TODO: use actual data only, here we merge the "real" data into the mocked data_array and shared array
     // This is the working download document
@@ -753,10 +753,10 @@ c-31.796,0-57.663-25.868-57.663-57.663S170.825,48.515,202.621,48.515z'
                     <div>
                         <div className='mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3 drop-shadow-lg'>
                             {shareView
-                                ? null
+                                ? mapMock(shared_array)
                                 : mapMock(data_array, false)}
                             {shareView
-                                ? mapReal(sharedDocuments)
+                                ? null // mapReal(sharedDocuments)
                                 : mapReal(myDocuments)
                             }
                         </div>
