@@ -61,8 +61,7 @@ class Writer extends Component {
             title: "Microscopic study of the compound nucleus formation in cold-fusion reactions",
             category: "Nuclear Theory",
             abstract: "The understanding of the fusion probability is of particular importance to reveal the mechanism of producing superheavy elements. We present a microscopic study of the compound nucleus formation by combining time-dependent density functional theory, coupled-channels approach, and dynamical diffusion models. The fusion probability and compound nucleus formation cross sections for cold-fusion reactions 48Ca+208Pb, 50Ti+208Pb, and 54Cr+208Pb are investigated and it is found that the deduced capture barriers, capture cross sections for these reactions are consistent with experimental data. Above the capture barrier, our calculations reproduce the measured fusion probability reasonably well. Our studies demonstrate that the restrictions from the microscopic dynamic theory improve the predictive power of the coupled-channels and diffusion calculations.",
-            keywords: "Cold Fusion, Nuclear, Physics",
-            nft: "AXT9R69MVvtxhhLiGAF78ziXBRiC37qAsKYkM1Whm1wg"
+            keywords: "Cold Fusion, Nuclear, Physics"
         };
     }
 
@@ -131,8 +130,7 @@ class Writer extends Component {
             title,
             category,
             abstract,
-            keywords,
-            nft
+            keywords
         } = this.state;
 
         //1. login. The login could be done only once if the nodeApi and session variables are kept in the component state
@@ -140,20 +138,10 @@ class Writer extends Component {
 
         //const did = "did:inked:" + v4().replace("-", "");
         const did = "did:inked:123456789abcdef";
-        const location = sideChain;
-
-        const toBase64 = file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
+        const location = sideChain
 
         //2. write public info
         {
-            const image = document.querySelector('#uploaded_image').files[0];
-            const encoded_image = await toBase64(image);
-
             const items = [
                 [
                     null, //_id, filled server side
@@ -165,7 +153,6 @@ class Writer extends Component {
                     title,
                     category,
                     abstract,
-                    encoded_image,
                     keywords,
                     location
                 ]
@@ -178,6 +165,13 @@ class Writer extends Component {
         //3. write private info
         {
             try {
+                const toBase64 = file => new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = error => reject(error);
+                });
+
                 const file = document.querySelector('#uploaded_file').files[0];
                 const encoded = await toBase64(file);
                 const content = encoded.substr("data:application/pdf;base64,".length);
@@ -215,7 +209,9 @@ class Writer extends Component {
                 }
 
                 //TODO: create new NFT to control the access to the document
-                const access = "nft:solana:" + nft;
+                const nft_address = "12345"; //TODO
+
+                const access = "nft:solana:" + nft_address;
                 const items = [
                     [
                         null, //_id, filled server side
@@ -468,11 +464,10 @@ class Writer extends Component {
             abstract,
             keywords,
             success,
-            message,
-            nft
+            message
         } = this.state;
 
-        return <div className="text-gray-800 bg-white min-h-screen">
+        return <div className="text-gray-800 bg-teal-50 min-h-screen">
             <header className="items-center justify-between pt-12">
                 <h1 className="mx-auto text-center pb-2 text-5xl font-extrabold font-mono text-gray-800">
                     Writing a document
@@ -499,20 +494,6 @@ class Writer extends Component {
                     <input type="file" name="uploaded_file" id="uploaded_file" />
                     <br />
                     <br />
-                    <label>Image</label>
-                    <br />
-                    <input type="file" name="uploaded_image" id="uploaded_image" />
-                    <br />
-                    <br />
-
-                    <label>NFT</label>
-                    &nbsp;
-                    <input className='border shadow-xl border-blue-500/10 text-center' style={{width: "600px"}}
-                        type="text"
-                        placeholder="0"
-                        value={nft}
-                        onChange={(event) => this.setState({ nft: event.target.value })}
-                    />
 
                     <label>Authors</label>
                     &nbsp;
@@ -525,7 +506,7 @@ class Writer extends Component {
                     <br />
                     <label>Title</label>
                     &nbsp;
-                    {/* <CodeEditor className="mt-12 mx-8 border shadow-xl border-blue-500/10"
+                    <CodeEditor className="mt-12 mx-8 border shadow-xl border-blue-500/10"
                                 value={title}
                                 language="text"
                                 rows={5}
@@ -538,7 +519,7 @@ class Writer extends Component {
                                     fontFamily:
                                         "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
                                 }}
-                    /> */}
+                    />
                     <br />
                     <br />
 
@@ -553,7 +534,7 @@ class Writer extends Component {
                     <br />
                     <br />
                     <label>Abstract</label>
-                    {/* <CodeEditor className="mt-12 mx-8 border shadow-xl border-blue-500/10"
+                    <CodeEditor className="mt-12 mx-8 border shadow-xl border-blue-500/10"
                                 value={abstract}
                                 language="text"
                                 rows={20}
@@ -566,7 +547,7 @@ class Writer extends Component {
                                     fontFamily:
                                         "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
                                 }}
-                    /> */}
+                    />
                     <br />
                     <br />
 

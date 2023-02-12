@@ -8,7 +8,7 @@ export function NavBar({connected,setConnected}) {
   // Top Navigation Bar Element
   return (
 
-    <header className="bg-orange-700 font-mono">
+    <header className="bg-orange-700">
       <div className="px-6 mx-auto max-w-screen-xl sm:px-6 lg:px-8 items-center">
 
         <div className="flex items-center justify-between h-16">
@@ -31,20 +31,6 @@ export function NavBar({connected,setConnected}) {
                 Dashboard
               </p>
             </Link>}
-            <Link href="/Writer">
-              <p className="text-white transition hover:text-white/75">
-                Writer.js
-              </p>
-            </Link>
-
-            <Link href="/Reader">
-              <p className="text-white transition hover:text-white/75">
-                Reader.js
-              </p>
-            </Link>
-
-
-            
 
             <ConnectToPhantom connected={connected} setConnected ={setConnected} key={connected} />
 
