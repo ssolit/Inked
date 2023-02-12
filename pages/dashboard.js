@@ -61,18 +61,18 @@ export default function dashboard({ connected, setConnected }) {
 
     if (connected === false) {
         return (
-            <div class='h-screen opacity-75 '>
-                <p class='text-[72px] text-center align-middle mt-10 text-orange-800'>
+            <div className='h-screen opacity-75 '>
+                <p className='text-[72px] text-center align-middle mt-10 text-orange-800'>
                     {' '}
                     Welcome to Inked!
                 </p>
 
-                <p class='text-[36px] text-center align-middle text-orange-900'>
+                <p className='text-[36px] text-center align-middle text-orange-900'>
                     {' '}
                     Please connect your Phantom wallet to continue.{' '}
                 </p>
                 <Image
-                    class='mx-auto mt-10'
+                    className='mx-auto mt-10'
                     src='/phantom-icon.png'
                     alt='phantom wallet'
                     width={300}
@@ -82,9 +82,9 @@ export default function dashboard({ connected, setConnected }) {
         );
     } else {
         return (
-            <div class='px-4 pt-12 pb-32 mx-auto max-w-screen-x1 sm:px-6 lg:px-8'>
-                <div class='flex flex-row justify-between rounded-sm p-4 border-4'>
-                    <h1 class='text-black font-medium text-[36px]'>
+            <div className='px-4 pt-12 pb-32 mx-auto max-w-screen-x1 sm:px-6 lg:px-8'>
+                <div className='flex flex-row justify-between rounded-sm p-4 border-4'>
+                    <h1 className='text-black font-medium text-[36px]'>
                         Inked Paper Dashboard
                     </h1>
                     <button
@@ -93,7 +93,7 @@ export default function dashboard({ connected, setConnected }) {
                                 setButtonClick(true);
                             }
                         }}
-                        class='bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-sm'
+                        className='bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-sm'
                     >
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
@@ -101,7 +101,7 @@ export default function dashboard({ connected, setConnected }) {
                             viewBox='0 0 24 24'
                             strokeWidth={1.5}
                             stroke='currentColor'
-                            className='w-6 h-6'
+                            classNameName='w-6 h-6'
                         >
                             <path
                                 strokeLinecap='round'
@@ -113,21 +113,21 @@ export default function dashboard({ connected, setConnected }) {
                         <span>Upload</span>
                     </button>
                 </div>
-                <div class='p-4'>
-                    <div class='flex justify-evenly p-4'>
+                <div className='p-4'>
+                    <div className='flex justify-evenly p-4'>
                         <div>
-                            <button class='bg-gray-300 hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-sm'>
+                            <button className='bg-gray-300 hover:bg-gray-400 text-black font-medium py-2 px-4 rounded-sm'>
                                 My Papers
                             </button>
                         </div>
                         <div>
-                            <button class='bg-gray-100 hover:bg-gray-400 text-slate-600 font-medium py-2 px-4 rounded-sm'>
+                            <button className='bg-gray-100 hover:bg-gray-400 text-slate-600 font-medium py-2 px-4 rounded-sm'>
                                 Shared With Me
                             </button>
                         </div>
                     </div>
 
-                    <div class='relative '>
+                    <div className='relative '>
                         {buttonClick && (
                             <Upload
                                 buttonClick={buttonClick}
@@ -137,22 +137,22 @@ export default function dashboard({ connected, setConnected }) {
                     </div>
 
                     <div>
-                        <div class='mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3 drop-shadow-lg'>
+                        <div className='mt-8 grid grid-cols-3 gap-8 md:grid-cols-2 lg:grid-cols-3 drop-shadow-lg'>
                             {data_array.map((item) => (
                                 <div
-                                    class='bg-blue-100 rounded-t'
+                                    className='bg-blue-100 rounded-t'
                                     key={item['hash']}
                                 >
                                     <Image
-                                        class='rounded-t-lg'
+                                        className='rounded-t-lg'
                                         src={item['image']}
                                         alt='papers image'
                                         width={500}
                                         height={500}
                                     />
-                                    <div class='pt-4 mx-4'>
-                                        <div className='flex flex-row justify-between'>
-                                            <p class='text-lg font-semibold mb-2'>
+                                    <div className='pt-4 mx-4'>
+                                        <div classNameName='flex flex-row justify-between'>
+                                            <p className='text-lg font-semibold mb-2'>
                                                 {' '}
                                                 {item['title']}{' '}
                                             </p>
@@ -200,7 +200,7 @@ export default function dashboard({ connected, setConnected }) {
                                                 </svg>
                                             </button>
                                             <button
-                                                className='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded ml-6'
+                                                classNameName='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded ml-6'
                                                 id='publishButton'
                                                 onClick={() => {
                                                     if (
@@ -258,18 +258,18 @@ export default function dashboard({ connected, setConnected }) {
                                             )}
                                         </div>
 
-                                        <p class='text-sm font-medium'>
+                                        <p className='text-sm font-medium'>
                                             Author: {item['author']}
                                         </p>
-                                        <p class='text-sm font-medium'>
+                                        <p className='text-sm font-medium'>
                                             Shared With: {item['shared']}
                                         </p>
-                                        <div class='text-center text-xs p-1 bg-gray-100 rounded-full w-3/4 mt-2 mb-2'>
+                                        <div className='text-center text-xs p-1 bg-gray-100 rounded-full w-3/4 mt-2 mb-2'>
                                             Peer Reviewed By: {item['reviewed']}
                                         </div>
                                     </div>
                                     <Link href={item['url']}>
-                                        <p className='text-bg-gray-300 hover:text-cyan-600 text-xs text-right underline transition hover:decoration-blue-400 m-1'>
+                                        <p classNameName='text-bg-gray-300 hover:text-cyan-600 text-xs text-right underline transition hover:decoration-blue-400 m-1'>
                                             Open In Explorer
                                         </p>
                                     </Link>
