@@ -24,3 +24,6 @@ https://youtu.be/NrkgYXhtmtQ
 yarn install 
 yarn dev
 ```
+## Prize
+This project won 1st place in the Solana Track at the UPenn 2023 Blockchain Conference
+https://www.weavechain.com/learn-blog/inked
